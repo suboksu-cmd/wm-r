@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>법인영업 레이더</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='1' width='14' height='14' rx='3' fill='%232447d6'/%3E%3Cpath d='M4 11l3-3 2 2 3-4' stroke='white' stroke-width='1.6' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* 업무툴 셸: 사이드바 · 목록 · 상세 3단. 정보는 표로, 색은 상태에만. */
+:root{
+  --bg:#f3f4f6;--side:#eceef1;--panel:#fff;--panel-2:#f7f8fa;--hover:#f1f3f6;--sel:#e8edfd;
+  --line:#e1e4e9;--line-2:#eceef2;--ink:#111827;--ink-2:#394150;--mute:#6b7280;--faint:#9aa1ad;
+  --accent:#2447d6;--accent-ink:#fff;--accent-weak:#e8edfd;
+  --hot:#c8321f;--hot-weak:#fdecea;--warm:#a75a00;--warm-weak:#fdf1e1;--ok:#0b7a43;--ok-weak:#e4f4ea;
+  --c-fund:#2447d6;--c-bb:#6b46c1;--c-pl:#c2410c;--c-ul:#0f766e;--c-lp:#64748b;
+  --up:#c8321f;--down:#1d5fd1;--gold:#c98a00;
+  --f-ui:"Pretendard Variable","Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-num:"Pretendard Variable","Pretendard","Malgun Gothic",system-ui,sans-serif;
+  --row:34px;--r:6px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c1016;--side:#0f141b;--panel:#131920;--panel-2:#171e26;--hover:#1a222c;--sel:#1b2645;
+  --line:#232b36;--line-2:#1c232d;--ink:#e5e8ee;--ink-2:#b2b9c5;--mute:#808999;--faint:#5c6575;
+  --accent:#7d95ff;--accent-ink:#0c1016;--accent-weak:#1b2645;
+  --hot:#f2735f;--hot-weak:#3a1a16;--warm:#f0a73a;--warm-weak:#33250f;--ok:#4cc38a;--ok-weak:#12291e;
+  --c-fund:#7d95ff;--c-bb:#a98bf0;--c-pl:#f08a4b;--c-ul:#3fbfb0;--c-lp:#94a3b8;--up:#f2735f;--down:#6ea2ff;--gold:#f0c040;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1016;--side:#0f141b;--panel:#131920;--panel-2:#171e26;--hover:#1a222c;--sel:#1b2645;
+  --line:#232b36;--line-2:#1c232d;--ink:#e5e8ee;--ink-2:#b2b9c5;--mute:#808999;--faint:#5c6575;
+  --accent:#7d95ff;--accent-ink:#0c1016;--accent-weak:#1b2645;
+  --hot:#f2735f;--hot-weak:#3a1a16;--warm:#f0a73a;--warm-weak:#33250f;--ok:#4cc38a;--ok-weak:#12291e;
+  --c-fund:#7d95ff;--c-bb:#a98bf0;--c-pl:#f08a4b;--c-ul:#3fbfb0;--c-lp:#94a3b8;--up:#f2735f;--down:#6ea2ff;--gold:#f0c040;color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:13px/1.45 var(--f-ui);letter-spacing:-.005em;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+[hidden]{display:none!important}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.mute{color:var(--mute)}.faint{color:var(--faint)}.gold{color:var(--gold)}
+svg.i{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* 로그인 */
+.gate{min-height:100%;display:grid;place-items:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
+.gate form{width:100%;max-width:340px;display:grid;gap:10px}
+.gate .mark{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-bottom:14px}
+.gate .mark b{width:20px;height:20px;border-radius:5px;background:var(--accent);display:grid;place-items:center}
+.gate label.f{display:grid;gap:4px;font-size:12px;color:var(--mute)}
+.gate input[type=text],.gate input[type=password]{height:38px;padding:0 11px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);font-size:14px}
+.gate .chk{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--ink-2)}
+.gate button{height:38px;border:0;border-radius:var(--r);background:var(--accent);color:var(--accent-ink);font-weight:600;cursor:pointer;margin-top:4px}
+.gate .err{color:var(--hot);font-size:12px;min-height:16px}
+.gate .foot{margin-top:18px;font-size:11px;color:var(--faint);line-height:1.6}
+
+/* 셸 */
+.app{height:100%;display:grid;grid-template-columns:208px minmax(0,1fr)}
+.side{background:var(--side);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;padding:12px 8px calc(10px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.brand{display:flex;align-items:center;gap:8px;padding:2px 8px 12px;font-weight:700;font-size:14px}
+.brand b{width:18px;height:18px;border-radius:4px;background:var(--accent);display:grid;place-items:center}
+.brand b svg{width:12px;height:12px;stroke:#fff;stroke-width:2}
+.find{display:flex;align-items:center;gap:8px;height:30px;margin:0 2px 10px;padding:0 8px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);color:var(--mute);cursor:pointer;font-size:12px}
+.find kbd{margin-left:auto}
+kbd{font:11px var(--f-num);padding:1px 5px;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;background:var(--panel);color:var(--mute)}
+.nav{display:flex;flex-direction:column;gap:1px}
+.nav a{display:flex;align-items:center;gap:9px;height:30px;padding:0 8px;border-radius:var(--r);color:var(--ink-2);text-decoration:none}
+.nav a:hover{background:var(--hover)}
+.nav a.on{background:var(--panel);color:var(--ink);font-weight:600;box-shadow:0 0 0 1px var(--line)}
+.nav a .n{margin-left:auto;font-size:11px;color:var(--mute)}
+.nav a .n.hot{color:var(--hot);font-weight:600}
+.nav .sep{height:1px;background:var(--line);margin:8px 6px}
+.fresh{margin-top:auto;padding:10px 8px 8px;border-top:1px solid var(--line);display:grid;gap:5px;font-size:11px}
+.fresh .h{color:var(--mute);text-transform:uppercase;letter-spacing:.06em;font-size:10px;margin-bottom:2px}
+.fresh div{display:flex;align-items:center;gap:6px;color:var(--ink-2)}
+.fresh i{width:6px;height:6px;border-radius:50%;background:var(--ok);flex:none}
+.fresh i.w{background:var(--warm)}.fresh i.h{background:var(--hot)}
+.fresh .d{margin-left:auto;color:var(--mute)}
+.me{display:flex;align-items:center;gap:4px;padding:8px 6px 0;font-size:12px;color:var(--ink-2)}
+.me span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ib{width:28px;height:28px;display:grid;place-items:center;border:0;background:none;border-radius:var(--r);color:var(--mute);cursor:pointer}
+.ib:hover{background:var(--hover);color:var(--ink)}
+
+.main{display:grid;grid-template-rows:auto minmax(0,1fr);min-width:0;min-height:0}
+.bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel);min-height:50px}
+.bar h1{font-size:15px;margin:0;font-weight:700;white-space:nowrap}
+.bar .meta{color:var(--mute);font-size:12px;min-width:0}
+.bar .sp{flex:1}
+.work{display:grid;grid-template-columns:minmax(0,1fr) 400px;min-height:0}
+.work.wide{grid-template-columns:minmax(0,1fr)}
+.work.wide .detail{display:none}
+.pane{overflow:auto;min-height:0;min-width:0}
+.detail{border-left:1px solid var(--line);background:var(--panel);overflow:auto;min-height:0}
+
+/* 컨트롤 */
+.seg{display:inline-flex;height:28px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);overflow:hidden}
+.seg button{border:0;background:none;padding:0 10px;cursor:pointer;color:var(--ink-2);font-size:12px;white-space:nowrap;border-right:1px solid var(--line-2)}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--ink);color:var(--panel);font-weight:600}
+.sel,.txt{height:28px;padding:0 8px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);font-size:12px}
+.txt{width:170px}
+.btn{height:28px;display:inline-flex;align-items:center;gap:6px;padding:0 10px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);cursor:pointer;font-size:12px;color:var(--ink-2);white-space:nowrap;text-decoration:none}
+.btn:hover{background:var(--hover);color:var(--ink);text-decoration:none}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border:1px solid var(--line);border-radius:12px;background:var(--panel);cursor:pointer;font-size:12px;color:var(--ink-2)}
+.chip.on{border-color:var(--accent);color:var(--accent);background:var(--accent-weak);font-weight:600}
+.chip .n{font-size:11px;color:inherit;opacity:.8}
+.sw{width:7px;height:7px;border-radius:2px;background:var(--c);display:inline-block}
+
+/* 표 */
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{position:sticky;top:0;z-index:1;background:var(--panel-2);height:30px;padding:0 10px;text-align:left;font-weight:600;font-size:11px;color:var(--mute);border-bottom:1px solid var(--line);white-space:nowrap;cursor:pointer;user-select:none}
+th:hover{color:var(--ink)}
+th .ar{font-size:9px;margin-left:3px}
+td{height:var(--row);padding:0 10px;border-bottom:1px solid var(--line-2);white-space:nowrap;background:var(--panel)}
+th.r,td.r{text-align:right}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:var(--hover)}
+tbody tr.on td{background:var(--sel)}
+td.nm{font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis}
+td.wrap{white-space:normal;line-height:1.35;padding-block:6px;max-width:320px}
+.more{display:block;margin:12px auto 24px;height:28px;padding:0 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);cursor:pointer;font-size:12px;color:var(--ink-2)}
+.sub-h{display:flex;align-items:center;gap:8px;padding:14px 16px 6px;font-size:11px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
+.sub-h .n{color:var(--ink-2)}
+.empty{padding:40px 16px;text-align:center;color:var(--mute)}
+.filters{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel)}
+.filters .cnt{margin-left:auto;color:var(--mute);font-size:12px}
+
+/* 신호 표시 */
+.sg{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2)}
+.sg::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--c);flex:none}
+.sg b{font-weight:600;color:var(--ink)}
+.dd{display:inline-block;min-width:44px;padding:1px 6px;border-radius:4px;font-size:11px;font-weight:600;text-align:center;background:var(--panel-2);color:var(--ink-2);border:1px solid var(--line-2)}
+.dd.hot{background:var(--hot-weak);color:var(--hot);border-color:transparent}
+.dd.warm{background:var(--warm-weak);color:var(--warm);border-color:transparent}
+.dd.past{color:var(--faint)}
+.pill{display:inline-block;padding:0 6px;height:18px;line-height:18px;border-radius:4px;font-size:11px;font-weight:600;background:var(--panel-2);color:var(--ink-2);border:1px solid var(--line-2)}
+.pill.ok{background:var(--ok-weak);color:var(--ok);border-color:transparent}
+.pill.ac{background:var(--accent-weak);color:var(--accent);border-color:transparent}
+.pill.hot{background:var(--hot-weak);color:var(--hot);border-color:transparent}
+.new{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:2px}
+.star{color:var(--faint);cursor:pointer;border:0;background:none;padding:0 2px;line-height:1}
+.star.on{color:var(--gold)}
+.score{display:inline-flex;align-items:center;gap:6px;color:var(--ink-2)}
+.score i{display:block;width:28px;height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+.score i b{display:block;height:100%;background:var(--ink-2)}
+
+/* 상세 */
+.dh{padding:16px 18px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel);z-index:2}
+.dh .t{display:flex;align-items:center;gap:8px}
+.dh h2{margin:0;font-size:17px;font-weight:700;text-wrap:balance}
+.dh .m{margin-top:2px;color:var(--mute);font-size:12px}
+.dh .back{display:none}
+.dsec{padding:14px 18px;border-bottom:1px solid var(--line-2)}
+.dsec h3{margin:0 0 8px;font-size:11px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:8px}
+.kv{display:grid;grid-template-columns:84px minmax(0,1fr);gap:5px 10px;font-size:12px;margin:0}
+.kv dt{color:var(--mute)}.kv dd{margin:0;color:var(--ink);min-width:0;overflow-wrap:anywhere}
+.cp{border:0;background:none;color:var(--mute);cursor:pointer;padding:0 2px}
+.cp:hover{color:var(--accent)}
+.prods{display:flex;gap:4px;flex-wrap:wrap}
+.rec{display:grid;gap:8px}
+.rec .row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.rec textarea{width:100%;min-height:64px;padding:8px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);resize:vertical;font-size:12px;line-height:1.5}
+.rec input[type=date]{height:28px;padding:0 6px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);font-size:12px}
+.saved{font-size:11px;color:var(--ok);text-transform:none;letter-spacing:0;font-weight:500}
+.sig{padding:12px 0;border-top:1px solid var(--line-2)}
+.sig:first-of-type{border-top:0;padding-top:2px}
+.sig .h{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.sig .h .sc{margin-left:auto;font-size:11px;color:var(--mute)}
+.talk{margin-top:10px;padding:10px 12px;background:var(--panel-2);border:1px solid var(--line-2);border-radius:var(--r);white-space:pre-wrap;font-size:12.5px;line-height:1.65;color:var(--ink-2)}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.calc{margin-top:8px;font-size:12px;color:var(--ink-2)}
+.why{margin-top:6px;font-size:11px;color:var(--faint)}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:12px}
+.tl li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:8px}
+.tl li span:first-child{color:var(--mute)}
+.notice{padding:12px 18px 24px;font-size:11px;line-height:1.6;color:var(--faint)}
+.dempty{height:100%;display:grid;place-items:center;text-align:center;color:var(--mute);padding:24px;font-size:12px;line-height:1.8}
+
+/* 배너 */
+.warnbar{padding:8px 16px;background:var(--warm-weak);color:var(--warm);font-size:12px;border-bottom:1px solid var(--line)}
+
+/* 달력 */
+.cal{padding:12px 16px 24px}
+.cal .hd{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.cal .hd b{font-size:14px;min-width:70px;text-align:center}
+.grid7{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);background:var(--panel)}
+.grid7 .w{padding:6px 8px;font-size:11px;color:var(--mute);border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel-2)}
+.grid7 .w.sun{color:var(--hot)}
+.day{min-height:96px;padding:5px 6px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);cursor:pointer;min-width:0}
+.day:hover{background:var(--hover)}
+.day.out{background:var(--panel-2)}.day.out .dn{color:var(--faint)}
+.day.on{box-shadow:inset 0 0 0 2px var(--accent)}
+.day .dn{font-size:11px;font-weight:600;color:var(--ink-2);display:flex;justify-content:space-between}
+.day.today .dn b{background:var(--accent);color:var(--accent-ink);border-radius:4px;padding:0 5px}
+.day .ev{display:flex;align-items:center;gap:4px;font-size:11px;line-height:17px;overflow:hidden;white-space:nowrap;color:var(--ink-2)}
+.day .ev::before{content:"";width:5px;height:5px;border-radius:1px;background:var(--c);flex:none}
+.day .more2{font-size:11px;color:var(--mute)}
+.day .cnt2{display:none;font-size:11px;color:var(--accent);font-weight:600}
+.daylist{margin-top:14px}
+
+/* 금리 */
+.mk{padding:12px 16px 24px;display:grid;gap:14px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.box .bh{display:flex;align-items:center;gap:8px;padding:8px 12px;min-height:40px;border-bottom:1px solid var(--line-2);font-weight:600;font-size:12px}
+.box .bh .mute{font-weight:400}
+.mkgrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:14px}
+.box .tw{overflow-x:auto}
+.chart{position:relative;height:250px;padding:6px 8px 0}
+.chart svg{width:100%;height:100%;display:block}
+.tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:6px 8px;font-size:11px;box-shadow:0 6px 18px rgba(0,0,0,.12);white-space:nowrap}
+.legend{display:flex;gap:12px;flex-wrap:wrap;padding:0 12px 10px;font-size:11px;color:var(--ink-2)}
+.legend i{display:inline-block;width:10px;height:2px;margin-right:5px;vertical-align:3px}
+.calcf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px}
+.calcf label{display:grid;gap:4px;font-size:11px;color:var(--mute)}
+.calcf input,.calcf select{height:30px;padding:0 8px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);min-width:0}
+.calcr{padding:0 12px 12px;font-size:12px;color:var(--ink-2);line-height:1.7}
+.calcr b{font-size:16px;color:var(--ink)}
+.idx{display:grid;grid-template-columns:repeat(6,minmax(0,1fr))}
+.idx>div{padding:10px 12px;border-right:1px solid var(--line-2)}
+.idx>div:last-child{border-right:0}
+.idx .l{font-size:11px;color:var(--mute)}.idx .v{font-size:15px;font-weight:600}
+.up{color:var(--up)}.down{color:var(--down)}
+.spark{display:block}
+
+/* 팔레트·토스트 */
+.pal{position:fixed;inset:0;z-index:50;background:rgba(8,12,18,.35);display:flex;justify-content:center;align-items:flex-start;padding:12vh max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+.pal .w{width:100%;max-width:560px;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 18px 50px rgba(0,0,0,.25);overflow:hidden}
+.pal input{width:100%;height:46px;padding:0 16px;border:0;border-bottom:1px solid var(--line);background:none;font-size:15px;outline:none}
+.pal .rs{max-height:52vh;overflow:auto;padding:6px}
+.pal .it{display:flex;align-items:center;gap:10px;height:36px;padding:0 10px;border-radius:var(--r);cursor:pointer}
+.pal .it.on{background:var(--sel)}
+.pal .it .k{margin-left:auto;font-size:11px;color:var(--mute)}
+.pal .gh{padding:8px 10px 4px;font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:var(--ink);color:var(--panel);padding:8px 14px;border-radius:var(--r);font-size:12px}
+.keys{position:fixed;inset:0;z-index:55;background:rgba(8,12,18,.35);display:grid;place-items:center;padding:16px}
+.keys .w{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:280px;font-size:12px}
+.keys dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:10px 0 0}
+.keys dd{margin:0;color:var(--ink-2)}
+
+/* 좁은 화면 */
+@media (max-width:1180px){.work{grid-template-columns:minmax(0,1fr) 360px}.idx{grid-template-columns:repeat(3,minmax(0,1fr))}.idx>div:nth-child(3){border-right:0}.idx>div:nth-child(-n+3){border-bottom:1px solid var(--line-2)}.mkgrid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+  .side{flex-direction:row;align-items:center;gap:6px;padding:6px max(10px,env(safe-area-inset-right,0px)) 6px max(10px,env(safe-area-inset-left,0px));border-right:0;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+  .side::-webkit-scrollbar{display:none}
+  .brand{padding:0 4px}.brand span{display:none}
+  .find{margin:0;width:32px;padding:0;justify-content:center;flex:none}.find span,.find kbd{display:none}
+  .nav{flex-direction:row}.nav a{height:30px;white-space:nowrap}.nav a svg{display:none}.nav .sep,.fresh,.me span,#keysBtn{display:none}
+  .me{padding:0;margin-left:auto}
+  .work,.work.wide{grid-template-columns:minmax(0,1fr)}
+  .detail{position:fixed;inset:0;z-index:40;border-left:0;padding-top:env(safe-area-inset-top,0px)}
+  .detail:not(.open),.work.wide .detail:not(.open){display:none}
+  .work.wide .detail.open{display:block}
+  .dh .back{display:grid}
+  .bar{padding:8px max(12px,env(safe-area-inset-right,0px)) 8px max(12px,env(safe-area-inset-left,0px))}
+  .bar .meta{flex-basis:100%;order:3}
+  .filters{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+  .filters .cnt{margin-left:0;flex-basis:100%}
+  .txt{width:130px}
+  .day{min-height:52px}.day .ev,.day .more2,.day .dn .faint{display:none}.day .cnt2{display:block}
+  .cal,.mk{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+  .calcf{grid-template-columns:minmax(0,1fr)}
+  .hide-m{display:none}
+}
+@media print{
+  .side,.bar .btn,.filters,.detail,.warnbar{display:none!important}
+  .app{display:block;height:auto}.main,.work,.pane{display:block;overflow:visible}
+  body{background:#fff;color:#000}td,th{background:#fff!important;color:#000!important;position:static}
+}
+</style>
+</head>
+<body>
+<div class="gate" id="gate">
+  <form id="gateForm" autocomplete="on">
+    <div class="mark"><b><svg class="i" viewBox="0 0 16 16" style="stroke:#fff;width:12px;height:12px"><path d="M3 11l3-3 2 2 4-5"/></svg></b>법인영업 레이더</div>
+    <label class="f" for="gId">아이디<input type="text" id="gId" name="username" autocomplete="username" required></label>
+    <label class="f" for="gPw">비밀번호<input type="password" id="gPw" autocomplete="current-password" placeholder="xxxx-xxxx-xxxx-xxxx" required></label>
+    <label class="chk"><input type="checkbox" id="gRem" checked> 이 기기에서 로그인 유지</label>
+    <button type="submit" id="gBtn">로그인</button>
+    <div class="err" id="gErr"></div>
+    <div class="foot">법인WM 내부용. 계정은 개인별로 발급되며 공유할 수 없습니다.<br>공용 PC에서는 로그인 유지를 끄세요.</div>
+  </form>
+</div>
+
+<div class="app" id="app" hidden>
+  <aside class="side">
+    <div class="brand"><b><svg class="i" viewBox="0 0 16 16"><path d="M3 11l3-3 2 2 4-5"/></svg></b><span>법인영업 레이더</span></div>
+    <button class="find" id="findBtn" type="button" aria-label="법인 찾기"><svg class="i" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg><span>법인 찾기</span><kbd>Ctrl K</kbd></button>
+    <nav class="nav" id="nav"></nav>
+    <div class="fresh" id="fresh"></div>
+    <div class="me"><span id="meName"></span>
+      <button class="ib" id="keysBtn" title="단축키 (?)" type="button"><svg class="i" viewBox="0 0 16 16"><rect x="1.5" y="4" width="13" height="8" rx="1.5"/><path d="M4 7h1M7 7h1M10 7h2M4.5 9.5h7"/></svg></button>
+      <button class="ib" id="themeBtn" title="밝게/어둡게" type="button"><svg class="i" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 2.5a5.5 5.5 0 0 1 0 11z" fill="currentColor"/></svg></button>
+      <button class="ib" id="lockBtn" title="로그아웃 (이 기기의 로그인 정보 삭제)" type="button"><svg class="i" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg></button>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="bar" id="bar"></div>
+    <div class="work" id="work">
+      <div class="pane" id="pane"></div>
+      <section class="detail" id="detail" aria-label="법인 상세"></section>
+    </div>
+  </div>
+</div>
+<div class="pal" id="pal" hidden><div class="w"><input id="palQ" placeholder="법인명, 종목코드, 사업자번호 또는 메뉴" autocomplete="off"><div class="rs" id="palR"></div></div></div>
+<div class="keys" id="keys" hidden><div class="w"><b>단축키</b><dl>
+  <dt><kbd>Ctrl</kbd> <kbd>K</kbd> · <kbd>/</kbd></dt><dd>법인 찾기</dd>
+  <dt><kbd>J</kbd> <kbd>K</kbd></dt><dd>목록 아래·위</dd>
+  <dt><kbd>S</kbd></dt><dd>관심 법인 표시</dd>
+  <dt><kbd>C</kbd></dt><dd>첫 신호의 멘트 복사</dd>
+  <dt><kbd>1</kbd>–<kbd>7</kbd></dt><dd>메뉴 이동</dd>
+  <dt><kbd>Esc</kbd></dt><dd>닫기</dd></dl></div></div>
+
+<script>
+"use strict";
+(() => {
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const eok = n => n == null || n === "" ? "–" : `${Math.round(n / 1e8).toLocaleString("ko-KR")}억`;
+const won = n => Math.abs(n) >= 1e8 ? `${(n / 1e8).toLocaleString("ko-KR", {maximumFractionDigits: 2})}억원` : `${Math.round(n / 1e4).toLocaleString("ko-KR")}만원`;
+const ymd = d => d ? d.replaceAll("-", ".") : "";
+const md = d => d ? `${+d.slice(5, 7)}/${+d.slice(8, 10)}` : "";
+const iso = x => `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, "0")}-${String(x.getDate()).padStart(2, "0")}`;
+const addDays = (d, n) => { const x = new Date(d + "T00:00:00"); x.setDate(x.getDate() + n); return iso(x); };
+const TODAY = iso(new Date());
+const dday = d => d ? Math.round((new Date(d + "T00:00:00") - new Date(TODAY + "T00:00:00")) / 864e5) : null;
+const MK = {Y: "유가", K: "코스닥", N: "코넥스", E: "비상장"};
+const debounce = (f, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => f(...a), ms); }; };
+const store = {get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e) { return d; } },
+               set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch(e) { return false; } }};
+function toast(m) { const t = document.createElement("div"); t.className = "toast"; t.textContent = m; document.body.append(t); setTimeout(() => t.remove(), 1700); }
+async function copy(txt, msg) {
+  try { await navigator.clipboard.writeText(txt); }
+  catch(e) { const ta = document.createElement("textarea"); ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.append(ta); ta.select(); try { document.execCommand("copy"); } catch(_) {} ta.remove(); }
+  toast(msg || "복사했습니다");
+}
+function download(name, text, type) {
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name;
+  document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+const I = {
+  inbox: '<svg class="i" viewBox="0 0 16 16"><path d="M2 9l1.6-5.2A1 1 0 0 1 4.6 3h6.8a1 1 0 0 1 1 .8L14 9v3.5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/><path d="M2 9h3.5l1 1.5h3l1-1.5H14"/></svg>',
+  cal: '<svg class="i" viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>',
+  bars: '<svg class="i" viewBox="0 0 16 16"><path d="M2.5 13.5h11M4 11V7M8 11V3.5M12 11V8.5"/></svg>',
+  bldg: '<svg class="i" viewBox="0 0 16 16"><path d="M3 14V3.5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1V14M10 6.5h2a1 1 0 0 1 1 1V14M1.5 14h13M5.5 5h2M5.5 8h2M5.5 11h2"/></svg>',
+  pbr: '<svg class="i" viewBox="0 0 16 16"><path d="M2 13.5l4-4 2.5 2.5L14 6"/><path d="M10.5 6H14v3.5"/></svg>',
+  pct: '<svg class="i" viewBox="0 0 16 16"><path d="M12.5 3.5l-9 9"/><circle cx="4.5" cy="4.5" r="1.8"/><circle cx="11.5" cy="11.5" r="1.8"/></svg>',
+  pipe: '<svg class="i" viewBox="0 0 16 16"><rect x="2" y="2.5" width="3.5" height="11" rx="1"/><rect x="6.5" y="2.5" width="3.5" height="7" rx="1"/><rect x="11" y="2.5" width="3" height="4.5" rx="1"/></svg>',
+  dl: '<svg class="i" viewBox="0 0 16 16"><path d="M8 2.5v8M4.5 7.5L8 11l3.5-3.5M3 13.5h10"/></svg>',
+  copy: '<svg class="i" viewBox="0 0 16 16"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>',
+  ext: '<svg class="i" viewBox="0 0 16 16"><path d="M9 2.5h4.5V7M13.5 2.5L7.5 8.5M12 9.5v3a1 1 0 0 1-1 1H3.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3"/></svg>',
+  mail: '<svg class="i" viewBox="0 0 16 16"><rect x="2" y="3.5" width="12" height="9" rx="1.5"/><path d="M2.5 4.5L8 9l5.5-4.5"/></svg>',
+  back: '<svg class="i" viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg>',
+  x: '<svg class="i" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg>',
+  prn: '<svg class="i" viewBox="0 0 16 16"><path d="M4.5 6V2.5h7V6M4.5 11.5h-2v-5h11v5h-2M4.5 9.5h7v4h-7z"/></svg>',
+  up: '<svg class="i" viewBox="0 0 16 16"><path d="M8 13.5v-8M4.5 8.5L8 5l3.5 3.5M3 2.5h10"/></svg>',
+  chev: d => `<svg class="i" viewBox="0 0 16 16"><path d="${d < 0 ? "M10 3L5 8l5 5" : "M6 3l5 5-5 5"}"/></svg>`,
+};
+
+/* ───────── 신호 사전 ───────── */
+const T = {
+  FUND: {n: "자금조달", c: "var(--c-fund)"}, BB_END: {n: "신탁 해지", c: "var(--c-bb)"}, BB_DIRECT: {n: "자사주 직접취득", c: "var(--c-bb)"},
+  BB_EXPIRY: {n: "신탁 만기", c: "var(--c-bb)"}, PLEDGE: {n: "주식담보 만기", c: "var(--c-pl)"}, UL_CASH: {n: "여유자금", c: "var(--c-ul)"},
+  UL_DC: {n: "퇴직연금 DC", c: "var(--c-ul)"}, UL_FX: {n: "외화자금", c: "var(--c-ul)"}, LOWPBR: {n: "저PBR", c: "var(--c-lp)"},
+};
+const STAGE = {new: "납입 전", due: "납입 임박", paid: "납입 완료"};
+const ACTION = new Set(["FUND", "BB_END", "BB_DIRECT", "BB_EXPIRY", "PLEDGE"]);
+const sgn = s => `<span class="sg" style="--c:${T[s.t].c}"><b>${esc(T[s.t].n)}</b>${s.st ? esc(STAGE[s.st]) : ""}</span>`;
+function ddTag(s) {
+  const d = dday(s.d); if (d == null) return "";
+  if (s.t === "BB_END" || s.t === "BB_DIRECT") return `<span class="dd past num">${d === 0 ? "오늘" : -d + "일 전"}</span>`;
+  if ((s.t === "PLEDGE" || s.t === "BB_EXPIRY") && d < 0) return `<span class="dd past num">경과 ${-d}일</span>`;
+  const txt = d === 0 ? "D-day" : d > 0 ? `D-${d}` : `D+${-d}`;
+  return `<span class="dd num ${d >= -3 && d <= 7 ? "hot" : d >= -30 && d <= 30 ? "warm" : ""}">${txt}</span>`;
+}
+function fig(s) {   // 핵심 수치 한 칸
+  switch (s.t) {
+    case "FUND": return `${esc(s.kind)} <b class="num">${eok(s.amt)}</b>`;
+    case "BB_EXPIRY": return `<b class="num">${eok(s.amt)}</b> · ${esc(s.inst || "수탁사 미상")}`;
+    case "PLEDGE": return `${esc(s.holder)} · ${esc(s.lender)} <b class="num">${eok(s.amt)}</b>${s.rate ? ` <span class="mute num">${s.rate}%</span>` : ""}`;
+    case "BB_END": case "BB_DIRECT": return esc(title(s));
+    case "UL_CASH": return `<b class="num">${eok(s.amt)}</b> 현금성`;
+    case "UL_DC": return esc(s.pension);
+    case "UL_FX": return `<b class="num">${eok(s.amt)}</b> 외화`;
+    case "LOWPBR": return `PBR <b class="num">${s.pbr}</b>`;
+  }
+  return "";
+}
+const title = s => (s.title || "").replace(/^\[.*?\]/, "").replace("주요사항보고서", "").replace(/^\(|\)$/g, "");
+
+/* ───────── 멘트·메일 (수익 보장·확정 표현 금지) ───────── */
+function talk(s, c) {
+  const nm = c.n, ours = D.our_firm;
+  switch (s.t) {
+    case "FUND":
+      if (s.st === "new") return `${nm} ${s.kind} ${eok(s.amt)} 결정 공시를 보고 연락드렸습니다.\n${s.d ? `납입(${ymd(s.d)}) 이후 ` : ""}실제 집행까지 대기하는 자금 운용 계획을 여쭙고 싶습니다.\n하루 단위로도 맡길 수 있는 RP·발행어음·MMW의 금리와 만기 구조를 비교해 드리겠습니다.`;
+      if (s.st === "due") return `${nm} ${s.kind} 납입일(${ymd(s.d)})이 다가와 연락드렸습니다.\n납입 후 집행까지 기간을 알려주시면 그 기간에 맞춘 RP·발행어음 만기 구성안을 오늘 중 보내드리겠습니다.`;
+      return `${nm} ${s.kind} 납입(${ymd(s.d)})이 끝난 것으로 확인됩니다.\n집행 일정에 맞춰 구간별로 나눠 운용하는 방안(수시 RP와 기간물 발행어음)을 제안드리고 싶습니다.`;
+    case "BB_END": return `${nm} 자기주식취득 신탁계약 해지 공시를 확인했습니다.\n추가 매입 계획이 있으시면 재계약 조건(수수료, 매입 방식, 기간)을 비교하실 수 있도록 ${ours} 안을 드리겠습니다.`;
+    case "BB_DIRECT": return `${nm} 자기주식 직접취득 결정을 확인했습니다.\n신탁 방식은 매매 실무를 위탁하고 취득 기간을 유연하게 가져갈 수 있어, 다음 매입부터 비교해 보실 수 있게 자료를 드리겠습니다.`;
+    case "BB_EXPIRY": return s.ours
+      ? `${nm} 자사주신탁(${ours}) 만기가 ${ymd(s.d)}입니다.\n연장이나 재계약 여부와 남은 매입 계획을 미리 협의드리고자 합니다.`
+      : `${nm}의 ${s.inst || "타사"} 자사주신탁 만기가 ${ymd(s.d)}입니다.\n재계약을 검토하시면 ${ours} 조건을 함께 비교하실 수 있도록 제안서를 드리겠습니다.`;
+    case "PLEDGE": return s.ours
+      ? `${s.holder}님(${nm}) 주식담보대출(${ours}) 만기가 ${ymd(s.d)}입니다.\n연장 조건을 미리 안내드리고자 합니다.`
+      : `${s.holder}님(${nm}) 주식담보대출(${s.lender}, ${eok(s.amt)}${s.rate ? `, ${s.rate}%` : ""}) 만기가 ${ymd(s.d)}입니다.\n차환을 검토하시면 ${ours} 조건(금리, 담보유지비율, 기간)을 비교해 드리겠습니다.`;
+    case "UL_CASH": return `${nm} 감사보고서상 현금성자산이 ${eok(s.amt)} 수준으로 확인됩니다.\n예금 외에 RP·발행어음 같은 단기 운용 수단의 금리를 비교해 드리고 싶습니다.${s.pension && /DB만|미가입/.test(s.pension) ? `\n퇴직연금(현재 ${s.pension}) DC 제도 안내도 함께 가능합니다.` : ""}`;
+    case "UL_DC": return `${nm}은(는) 감사보고서상 퇴직연금이 ${s.pension}으로 파악됩니다.\nDC 도입이나 전환을 검토하시면 ${ours} 퇴직연금 담당 부서를 연결해 드리겠습니다.`;
+    case "UL_FX": return `${nm}은(는) 외화 현금 약 ${eok(s.amt)}을 보유하신 것으로 확인됩니다.\n외화예금과 외화RP의 금리, 만기 구조를 비교해 안내드리고자 합니다.`;
+    case "LOWPBR": return `${nm}은(는) PBR ${s.pbr}배로, 발행주식 10%를 매입하면 BPS가 약 ${s.bps10}% 개선되는 구조입니다(산식 기준).\n주주환원 차원에서 자사주신탁 활용 방안을 설명드리고 싶습니다.`;
+  }
+  return "";
+}
+function mail(s, c) {
+  const subj = {FUND: `${c.n} 조달자금 단기 운용 제안`, BB_END: `${c.n} 자사주신탁 재계약 비교 제안`, BB_DIRECT: `${c.n} 자사주 취득 신탁 방식 비교 자료`,
+    BB_EXPIRY: `${c.n} 자사주신탁 만기 관련 안내`, PLEDGE: `주식담보대출 차환 조건 안내`, UL_CASH: `${c.n} 단기 여유자금 운용 안내`,
+    UL_DC: `퇴직연금 DC 제도 안내`, UL_FX: `외화RP 운용 안내`, LOWPBR: `자사주신탁을 통한 주주환원 방안`}[s.t];
+  return {subj: `[${D.our_firm}] ${subj}`, body: `${c.n} 재무 담당자님께\n\n안녕하십니까. ${D.our_firm} 법인WM 담당 ${ME.id}입니다.\n\n${talk(s, c)}\n\n통화 가능하신 시간을 알려주시면 연락드리겠습니다.\n${s.src ? `참고 공시: ${D.dart_url.replace("%s", s.src)}\n` : ""}\n감사합니다.\n${ME.id} 드림`};
+}
+
+/* ───────── 복호화 ───────── */
+const enc = new TextEncoder();
+const fromB64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function sha256hex(t) { const h = await crypto.subtle.digest("SHA-256", enc.encode(t)); return [...new Uint8Array(h)].map(x => x.toString(16).padStart(2, "0")).join(""); }
+const uidHash = async id => (await sha256hex("wmr-user:" + id.trim().toLowerCase())).slice(0, 32);
+async function deriveKek(pw, salt, iter) {
+  const base = await crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveKey"]);
+  return crypto.subtle.deriveKey({name: "PBKDF2", salt, iterations: iter, hash: "SHA-256"}, base, {name: "AES-GCM", length: 256}, false, ["decrypt"]);
+}
+async function openData(buf, keys, h, kek) {
+  const ent = keys.users[h]; if (!ent) throw new Error("no-user");
+  const w = fromB64(ent.w);
+  const raw = await crypto.subtle.decrypt({name: "AES-GCM", iv: w.slice(0, 12)}, kek, w.slice(12));
+  const k = await crypto.subtle.importKey("raw", raw, {name: "AES-GCM"}, false, ["decrypt"]);
+  const b = new Uint8Array(buf);
+  if (String.fromCharCode(...b.slice(0, 4)) !== "WMR1") throw new Error("bad-file");
+  const plain = await crypto.subtle.decrypt({name: "AES-GCM", iv: b.slice(4, 16)}, k, b.slice(16));
+  return new Response(new Blob([plain]).stream().pipeThrough(new DecompressionStream("gzip"))).json();
+}
+// 로그인 유지: 비밀번호가 아니라 추출할 수 없는 CryptoKey 를 IndexedDB 에 둔다
+const idb = () => new Promise((ok, no) => { const r = indexedDB.open("wmr", 1); r.onupgradeneeded = () => r.result.createObjectStore("k"); r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error); });
+async function kv(op, key, val) {
+  try { const db = await idb(); return await new Promise((ok, no) => { const tx = db.transaction("k", op === "get" ? "readonly" : "readwrite"), st = tx.objectStore("k");
+    const r = op === "get" ? st.get(key) : op === "put" ? st.put(val, key) : st.delete(key); r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error); }); }
+  catch(e) { return null; }
+}
+let ME = null, D = null;
+async function boot() {
+  let buf, keys;
+  try {
+    const [r1, r2] = await Promise.all([fetch(`data/data.enc?t=${Date.now()}`, {cache: "no-store"}), fetch(`data/keys.json?t=${Date.now()}`, {cache: "no-store"})]);
+    if (!r1.ok || !r2.ok) throw new Error(`HTTP ${r1.status}/${r2.status}`);
+    buf = await r1.arrayBuffer(); keys = await r2.json();
+  } catch(e) { $("#gErr").textContent = `데이터를 불러오지 못했습니다 (${e.message}). 네트워크를 확인하고 새로고침하세요.`; return; }
+  const saved = await kv("get", "me");
+  if (saved && saved.kek) {
+    try { D = await openData(buf, keys, saved.h, saved.kek); ME = saved; return start(); }
+    catch(e) { await kv("del", "me"); }   // 계정이 삭제·재발급되면 저장된 키는 더 맞지 않는다
+  }
+  $("#gId").focus();
+  $("#gateForm").onsubmit = async ev => {
+    ev.preventDefault();
+    const btn = $("#gBtn"); btn.disabled = true; btn.textContent = "확인 중"; $("#gErr").textContent = "";
+    try {
+      const id = $("#gId").value, h = await uidHash(id), ent = keys.users[h];
+      if (!ent) throw new Error("no-user");
+      const kek = await deriveKek($("#gPw").value.trim(), fromB64(ent.s), keys.iter);
+      D = await openData(buf, keys, h, kek);
+      ME = {h, id: id.trim(), kek};
+      if ($("#gRem").checked) await kv("put", "me", ME);
+      start();
+    } catch(e) { $("#gErr").textContent = "아이디 또는 비밀번호가 맞지 않습니다."; $("#gPw").select(); }
+    finally { btn.disabled = false; btn.textContent = "로그인"; }
+  };
+}
+
+/* ───────── 개인 저장(파이프라인·관심·신규) ───────── */
+const PSTAT = ["관심", "컨택 예정", "통화함", "미팅", "제안", "성사", "보류", "대상 아님"];
+let PIPE = {}, STAR = new Set(), NEW = new Set();
+const pk = k => `wmr-${k}-${ME.h}`;
+const savePipe = () => store.set(pk("pipe"), PIPE) || toast("이 브라우저가 저장을 막고 있습니다");
+const saveStar = () => store.set(pk("star"), [...STAR]);
+function initPersonal() {
+  PIPE = store.get(pk("pipe"), {}); STAR = new Set(store.get(pk("star"), []));
+  // 신규: 직전 빌드에 없던 시점 신호. 같은 빌드를 다시 열어도 유지되고 다음 빌드에서 갱신된다.
+  const ids = D.signals.filter(s => ACTION.has(s.t)).map(s => s.id);
+  let seen = store.get(pk("seen"), null);
+  if (!seen) seen = {build: D.built, base: ids, all: ids};
+  else if (seen.build !== D.built) seen = {build: D.built, base: seen.all, all: ids};
+  store.set(pk("seen"), seen);
+  const base = new Set(seen.base);
+  NEW = new Set(ids.filter(i => !base.has(i)));
+}
+
+/* ───────── 인덱스 ───────── */
+let BY = {}, ACTS = [];
+function index() {
+  BY = {};
+  for (const s of D.signals) (BY[s.cc] ||= []).push(s);
+  for (const cc in BY) BY[cc].sort((a, b) => b.sc - a.sc);
+  ACTS = D.signals.filter(s => ACTION.has(s.t));
+}
+const tagsOf = cc => [...new Set((BY[cc] || []).map(s => s.t))];
+const followups = () => Object.entries(PIPE).filter(([cc, p]) => p.next && p.next <= TODAY && D.corps[cc] && !["성사", "대상 아님"].includes(p.st)).map(([cc]) => cc);
+
+/* ───────── 라우팅·셸 ───────── */
+const VIEWS = [
+  ["today", "오늘", I.inbox], ["cal", "자금 일정", I.cal], ["listed", "상장사 신호", I.bars], ["unlisted", "비상장 법인", I.bldg],
+  ["lowpbr", "저PBR 자사주", I.pbr], ["market", "금리·시장", I.pct], ["pipe", "내 파이프라인", I.pipe],
+];
+let view = "today", SEL = null;
+function route() {
+  const [v, cc] = location.hash.slice(1).split("/");
+  const nv = VIEWS.some(x => x[0] === v) ? v : "today", changed = nv !== view || !$("#pane").childElementCount;
+  view = nv; SEL = cc && D.corps[cc] ? cc : null;
+  renderNav();
+  if (changed) renderView();
+  renderDetail();
+}
+window.addEventListener("hashchange", route);
+const go = (v, cc) => { const h = "#" + v + (cc ? "/" + cc : ""); if (location.hash !== h) location.hash = h; else route(); };
+const select = cc => go(view, cc);
+
+function renderNav() {
+  const fu = followups().length;
+  const n = {today: corpsToday().length, cal: ACTS.filter(s => s.d && ["FUND", "BB_EXPIRY", "PLEDGE"].includes(s.t) && dday(s.d) >= 0 && dday(s.d) <= 30).length,
+    listed: ACTS.length, unlisted: D.signals.filter(s => s.t === "UL_CASH").length, lowpbr: D.signals.filter(s => s.t === "LOWPBR").length, market: "", pipe: new Set([...Object.keys(PIPE), ...STAR]).size};
+  $("#nav").innerHTML = VIEWS.map(([k, l, ic], i) => `${i === 5 ? '<div class="sep"></div>' : ""}<a href="#${k}" class="${view === k ? "on" : ""}">${ic}${l}
+    <span class="n num ${k === "pipe" && fu ? "hot" : ""}">${k === "pipe" && fu ? `연락 ${fu}` : n[k] === "" || n[k] === 0 && k === "pipe" ? "" : Number(n[k]).toLocaleString()}</span></a>`).join("");
+}
+function renderFresh() {
+  const S = D.sources || {};
+  const rows = ["funding", "buyback", "pledge", "unlisted"].filter(k => S[k]).map(k => {
+    const s = S[k], lim = {funding: 4, buyback: 9, pledge: 9, unlisted: 45}[k];
+    const cls = s.lag > lim ? "h" : s.lag > lim / 2 ? "w" : "";
+    return `<div title="${esc(s.name)} · 마지막 공시 ${esc(s.last)}"><i class="${cls}"></i>${esc({funding: "자금조달", buyback: "자사주신탁", pledge: "주식담보", unlisted: "감사보고서"}[k])}<span class="d num">${md(s.last)}</span></div>`;
+  });
+  const rd = D.market?.rates?.[0]?.series?.at(-1)?.[0];
+  $("#fresh").innerHTML = `<div class="h">데이터 기준일</div>${rows.join("")}${rd ? `<div><i></i>시장금리<span class="d num">${md(rd)}</span></div>` : ""}<div class="faint" style="margin-top:2px">갱신 <span class="num">${esc(D.built.slice(5).replace("-", "/"))}</span></div>`;
+}
+function start() {
+  $("#gate").hidden = true; $("#app").hidden = false;
+  index(); initPersonal();
+  $("#meName").textContent = ME.id;
+  renderFresh();
+  if (!location.hash) location.hash = "#today"; else route();
+}
+
+/* ───────── 공통 표 ───────── */
+const TS = {};
+function table(key, cols, rows, defSort, defDir) {
+  const st = TS[key] ||= {k: defSort || cols[0].k, dir: defDir || -1};
+  const col = cols.find(c => c.k === st.k) || cols[0];
+  const sorted = [...rows].sort((a, b) => { const va = col.v(a), vb = col.v(b);
+    if (va == null && vb == null) return 0; if (va == null) return 1; if (vb == null) return -1;
+    return (va < vb ? -1 : va > vb ? 1 : 0) * st.dir; });
+  let shown = Math.min(sorted.length, 150);
+  const tr = r => `<tr data-cc="${esc(r.cc)}" class="${r.cc === SEL ? "on" : ""}">${cols.map(c => `<td class="${c.cls || ""}">${c.h ? c.h(r) : esc(c.v(r) ?? "–")}</td>`).join("")}</tr>`;
+  const html = `<table><thead><tr>${cols.map(c => `<th data-k="${c.k}" class="${c.r ? "r" : ""} ${c.hide ? "hide-m" : ""}">${c.l}${st.k === c.k ? `<span class="ar">${st.dir < 0 ? "▼" : "▲"}</span>` : ""}</th>`).join("")}</tr></thead>
+    <tbody>${sorted.slice(0, shown).map(tr).join("") || `<tr><td colspan="${cols.length}" class="empty">조건에 맞는 항목이 없습니다</td></tr>`}</tbody></table>
+    ${sorted.length > shown ? `<button class="more" data-more>${(sorted.length - shown).toLocaleString()}개 더 보기</button>` : ""}`;
+  return {html, rows: sorted, bind(root) {
+    root.querySelectorAll("th[data-k]").forEach(th => th.onclick = () => { st.dir = st.k === th.dataset.k ? -st.dir : -1; st.k = th.dataset.k; renderView(); });
+    const m = root.querySelector("[data-more]");
+    if (m) m.onclick = () => { root.querySelector("tbody").insertAdjacentHTML("beforeend", sorted.slice(shown, shown + 300).map(tr).join("")); shown += 300;
+      if (shown >= sorted.length) m.remove(); else m.textContent = `${(sorted.length - shown).toLocaleString()}개 더 보기`; bindRows(); };
+  }};
+}
+const H = c => ({...c, cls: [c.cls, c.r ? "r" : "", c.hide ? "hide-m" : ""].filter(Boolean).join(" ")});
+function csv(name, cols, rows) {
+  const q = v => `"${String(v ?? "").replaceAll('"', '""')}"`;
+  download(`${name}_${TODAY}.csv`, "﻿" + [cols.map(c => q(c[0])).join(","), ...rows.map(r => cols.map(c => q(c[1](r))).join(","))].join("\r\n"), "text/csv");
+  toast(`${rows.length.toLocaleString()}행을 CSV로 내보냈습니다`);
+}
+const corpCsvCols = [["법인", r => D.corps[r.cc]?.n], ["시장", r => MK[D.corps[r.cc]?.mk]], ["종목코드", r => D.corps[r.cc]?.sc], ["사업자번호", r => D.corps[r.cc]?.bz],
+  ["대표전화", r => D.corps[r.cc]?.ph], ["지역", r => D.corps[r.cc]?.rg]];
+const sigCsvCols = [["신호", r => T[r.t].n + (r.st ? " " + STAGE[r.st] : "")], ["금액(억)", r => r.amt ? Math.round(r.amt / 1e8) : ""], ["일자", r => r.d || r.rd],
+  ["우선순위", r => r.sc], ["내용", r => fig(r).replace(/<[^>]+>/g, "")], ["DART", r => r.src ? D.dart_url.replace("%s", r.src) : ""]];
+const nameCell = r => `${NEW.has(r.id) ? '<i class="new" title="지난 갱신 이후 새로 생긴 신호"></i>' : ""}${STAR.has(r.cc) ? '<span class="gold">★</span> ' : ""}${esc(D.corps[r.cc]?.n)}`;
+const pipeCell = r => { const p = PIPE[r.cc]; return p?.st ? `<span class="pill ${p.st === "성사" ? "ok" : "ac"}">${esc(p.st)}</span>` : ""; };
+const scoreCell = r => `<span class="score num" title="${esc((r.why || []).join("\n"))}">${r.sc}<i><b style="width:${Math.min(100, r.sc)}%"></b></i></span>`;
+
+function bar(t, meta, right) { $("#bar").innerHTML = `<h1>${t}</h1>${meta ? `<span class="meta">${meta}</span>` : ""}<span class="sp"></span>${right || ""}`; }
+function renderView() {
+  $("#pane").scrollTop = 0;
+  ({today: vToday, cal: vCal, listed: vListed, unlisted: vUnlisted, lowpbr: vLowpbr, market: vMarket, pipe: vPipe})[view]();
+  if (D.stale?.length && ["today", "listed", "cal"].includes(view))
+    $("#pane").insertAdjacentHTML("afterbegin", `<div class="warnbar">수집 지연: ${D.stale.map(esc).join(" · ")}. 이 소스의 최근 공시는 아직 반영되지 않았습니다.</div>`);
+  bindRows();
+}
+function bindRows() { $$("#pane tbody tr[data-cc]").forEach(tr => tr.onclick = e => { if (!e.target.closest("button,a,input,select")) select(tr.dataset.cc); }); }
+
+/* ───────── 오늘 ───────── */
+const fT = {type: "", side: "", min: 0, nw: false};
+function corpsToday() {
+  const best = new Map();
+  for (const s of ACTS) {
+    if (fT.type === "FUND" && s.t !== "FUND") continue;
+    if (fT.type === "BB" && !s.t.startsWith("BB_")) continue;
+    if (fT.type === "PLEDGE" && s.t !== "PLEDGE") continue;
+    if (fT.side === "ours" && !s.ours) continue;
+    if (fT.side === "other" && s.ours) continue;
+    if (fT.min && (s.amt || s.usable || 0) < fT.min) continue;
+    if (fT.nw && !NEW.has(s.id)) continue;
+    if (PIPE[s.cc]?.st === "대상 아님") continue;
+    const cur = best.get(s.cc); if (!cur || s.sc > cur.sc) best.set(s.cc, s);
+  }
+  return [...best.values()];
+}
+function vToday() {
+  const list = corpsToday(), fu = followups();
+  const cnt = f => ACTS.filter(f).length;
+  bar("오늘", `${TODAY.replaceAll("-", ".")} · 법인별로 가장 급한 신호 하나씩, 우선순위순`,
+    `<button class="btn hide-m" id="prt">${I.prn}통화 리스트 인쇄</button><button class="btn" id="exp">${I.dl}CSV</button>`);
+  const cols = [
+    H({k: "sc", l: "우선", v: r => r.sc, h: scoreCell}),
+    H({k: "n", l: "법인", v: r => D.corps[r.cc]?.n, h: nameCell, cls: "nm"}),
+    H({k: "t", l: "신호", v: r => T[r.t].n, h: sgn}),
+    H({k: "fig", l: "내용", v: r => r.amt || r.usable, h: fig, hide: 1}),
+    H({k: "d", l: "일자", v: r => r.d, h: r => `<span class="num mute">${md(r.d)}</span> ${ddTag(r)}`}),
+    H({k: "more", l: "함께 걸린 신호", v: r => tagsOf(r.cc).length, h: r => { const o = tagsOf(r.cc).filter(t => t !== r.t); return o.length ? `<span class="mute">${o.map(t => T[t].n).join(", ")}</span>` : ""; }, hide: 1}),
+    H({k: "ph", l: "대표전화", v: r => D.corps[r.cc]?.ph, h: r => `<span class="num">${esc(D.corps[r.cc]?.ph || "")}</span>`, hide: 1}),
+    H({k: "p", l: "상태", v: r => PIPE[r.cc]?.st, h: pipeCell}),
+  ];
+  const tb = table("today", cols, list, "sc");
+  const fuRows = fu.map(cc => ({cc, p: PIPE[cc]})).sort((a, b) => a.p.next.localeCompare(b.p.next));
+  $("#pane").innerHTML = `
+  <div class="filters">
+    <div class="seg" id="fType">${[["", "전체"], ["FUND", "자금조달"], ["BB", "자사주신탁"], ["PLEDGE", "주식담보"]].map(([v, l]) => `<button data-v="${v}" class="${fT.type === v ? "on" : ""}">${l}</button>`).join("")}</div>
+    <div class="seg" id="fSide">${[["", "전체 계약"], ["other", "타사"], ["ours", "자사"]].map(([v, l]) => `<button data-v="${v}" class="${fT.side === v ? "on" : ""}">${l}</button>`).join("")}</div>
+    <select class="sel" id="fMin" aria-label="금액">${[[0, "금액 전체"], [1e10, "100억 이상"], [5e10, "500억 이상"], [1e11, "1,000억 이상"]].map(([v, l]) => `<option value="${v}" ${fT.min == v ? "selected" : ""}>${l}</option>`).join("")}</select>
+    <button class="chip ${fT.nw ? "on" : ""}" id="fNew"><i class="new" style="margin:0"></i>신규 <span class="n num">${NEW.size}</span></button>
+    <span class="cnt num">납입 임박 ${cnt(s => s.t === "FUND" && s.st === "due")} · 7일 내 만기 ${cnt(s => (s.t === "PLEDGE" || s.t === "BB_EXPIRY") && dday(s.d) >= 0 && dday(s.d) <= 7)} · 법인 ${list.length}</span>
+  </div>
+  ${fuRows.length ? `<div class="sub-h">후속 연락 <span class="n num">${fuRows.length}</span></div>
+    <table><tbody>${fuRows.map(({cc, p}) => `<tr data-cc="${esc(cc)}" class="${cc === SEL ? "on" : ""}"><td class="nm">${esc(D.corps[cc].n)}</td><td><span class="pill ac">${esc(p.st || "메모")}</span></td>
+      <td class="num">${p.next < TODAY ? `<span class="pill hot">${-dday(p.next)}일 지남</span>` : '<span class="pill hot">오늘</span>'}</td><td class="wrap mute">${esc((p.memo || "").slice(0, 80))}</td></tr>`).join("")}</tbody></table>
+    <div class="sub-h">신호</div>` : ""}
+  ${tb.html}`;
+  tb.bind($("#pane"));
+  $$("#fType button").forEach(b => b.onclick = () => { fT.type = b.dataset.v; renderView(); renderNav(); });
+  $$("#fSide button").forEach(b => b.onclick = () => { fT.side = b.dataset.v; renderView(); renderNav(); });
+  $("#fMin").onchange = e => { fT.min = +e.target.value; renderView(); renderNav(); };
+  $("#fNew").onclick = () => { fT.nw = !fT.nw; renderView(); renderNav(); };
+  $("#exp").onclick = () => csv("오늘_우선순위", [...corpCsvCols, ...sigCsvCols, ["상태", r => PIPE[r.cc]?.st]], tb.rows);
+  $("#prt").onclick = () => window.print();
+}
+
+/* ───────── 자금 일정 (달력) ───────── */
+let calMonth = TODAY.slice(0, 7), calDay = TODAY;
+const fC = {fund: true, bb: true, pl: true, mine: true};
+function calEvents() {
+  const ev = ACTS.filter(s => s.d && ((s.t === "FUND" && fC.fund) || (s.t === "BB_EXPIRY" && fC.bb) || (s.t === "PLEDGE" && fC.pl)));
+  if (fC.mine) for (const [cc, p] of Object.entries(PIPE)) if (p.next && D.corps[cc]) ev.push({t: "MINE", cc, d: p.next, sc: 999, id: "mine:" + cc, memo: p.memo, pst: p.st});
+  return ev;
+}
+function vCal() {
+  const ev = calEvents(), byDay = {};
+  for (const e of ev) (byDay[e.d] ||= []).push(e);
+  for (const k in byDay) byDay[k].sort((a, b) => b.sc - a.sc);
+  const [y, m] = calMonth.split("-").map(Number), first = new Date(y, m - 1, 1), start = new Date(first); start.setDate(1 - first.getDay());
+  const cells = Array.from({length: 42}, (_, i) => { const x = new Date(start); x.setDate(start.getDate() + i); return iso(x); });
+  const weeks = cells[35].slice(0, 7) === calMonth ? 6 : 5;
+  const evName = e => e.t === "MINE" ? `연락 · ${D.corps[e.cc].n}` : `${D.corps[e.cc]?.n} ${e.amt ? eok(e.amt) : ""}`;
+  const evColor = e => e.t === "MINE" ? "var(--ink)" : T[e.t].c;
+  const monthEv = ev.filter(e => e.d.startsWith(calMonth));
+  bar("자금 일정", `${y}년 ${m}월 · 납입·신탁 만기·담보 만기 ${monthEv.filter(e => e.t !== "MINE").length}건`, `<button class="btn" id="ics">${I.cal}이 달 일정 내보내기(.ics)</button>`);
+  const dayEv = byDay[calDay] || [];
+  $("#pane").innerHTML = `<div class="cal">
+    <div class="hd"><button class="btn" id="cPrev" aria-label="이전 달">${I.chev(-1)}</button><b class="num">${y}.${String(m).padStart(2, "0")}</b><button class="btn" id="cNext" aria-label="다음 달">${I.chev(1)}</button>
+      <button class="btn" id="cToday">오늘</button><span style="flex:1"></span>
+      ${[["fund", "납입·지급", "--c-fund"], ["bb", "신탁 만기", "--c-bb"], ["pl", "담보 만기", "--c-pl"], ["mine", "내 연락", "--ink"]].map(([k, l, c]) => `<button class="chip ${fC[k] ? "on" : ""}" data-f="${k}"><span class="sw" style="--c:var(${c})"></span>${l}</button>`).join("")}</div>
+    <div class="grid7">${["일", "월", "화", "수", "목", "금", "토"].map((d, i) => `<div class="w ${i === 0 ? "sun" : ""}">${d}</div>`).join("")}
+    ${cells.slice(0, weeks * 7).map(d => { const es = byDay[d] || [];
+      return `<div class="day ${d.slice(0, 7) !== calMonth ? "out" : ""} ${d === TODAY ? "today" : ""} ${d === calDay ? "on" : ""}" data-d="${d}">
+        <div class="dn"><b class="num">${+d.slice(8)}</b>${es.length ? `<span class="faint num">${es.length}</span>` : ""}</div>
+        ${es.slice(0, 3).map(e => `<div class="ev" style="--c:${evColor(e)}">${esc(evName(e))}</div>`).join("")}${es.length > 3 ? `<div class="more2">외 ${es.length - 3}건</div>` : ""}
+        ${es.length ? `<div class="cnt2 num">${es.length}</div>` : ""}</div>`; }).join("")}</div>
+    <div class="daylist"><div class="sub-h" style="padding-left:0">${ymd(calDay)} <span class="n num">${dayEv.length}건</span></div>
+    ${dayEv.length ? `<table><tbody>${dayEv.map(e => `<tr data-cc="${esc(e.cc)}" class="${e.cc === SEL ? "on" : ""}"><td class="nm">${esc(D.corps[e.cc]?.n)}</td>
+      <td>${e.t === "MINE" ? `<span class="sg" style="--c:var(--ink)"><b>내 연락</b>${esc(e.pst || "")}</span>` : sgn(e)}</td><td class="wrap">${e.t === "MINE" ? esc(e.memo || "") : fig(e)}</td><td>${e.t === "MINE" ? "" : ddTag(e)}</td></tr>`).join("")}</tbody></table>`
+      : '<div class="empty" style="padding:16px">이 날은 일정이 없습니다</div>'}</div></div>`;
+  $$(".day").forEach(x => x.onclick = () => { calDay = x.dataset.d; if (calDay.slice(0, 7) !== calMonth) calMonth = calDay.slice(0, 7); renderView(); });
+  const shift = n => { calMonth = iso(new Date(y, m - 1 + n, 1)).slice(0, 7); calDay = calMonth + "-01"; renderView(); };
+  $("#cPrev").onclick = () => shift(-1); $("#cNext").onclick = () => shift(1);
+  $("#cToday").onclick = () => { calMonth = TODAY.slice(0, 7); calDay = TODAY; renderView(); };
+  $$("[data-f]").forEach(b => b.onclick = () => { fC[b.dataset.f] = !fC[b.dataset.f]; renderView(); });
+  $("#ics").onclick = () => monthEv.length ? ics(`자금일정_${calMonth}`, monthEv) : toast("이 달에는 내보낼 일정이 없습니다");
+}
+function ics(name, evs) {
+  const z = s => String(s).replace(/[\\;,]/g, m => "\\" + m).replace(/\n/g, "\\n");
+  const stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
+  const body = evs.map(e => { const c = D.corps[e.cc] || {}, d = e.d.replaceAll("-", ""), d2 = addDays(e.d, 1).replaceAll("-", "");
+    const t = e.t === "MINE" ? `[연락] ${c.n}` : `[${T[e.t].n}] ${c.n} ${e.amt ? eok(e.amt) : ""}`.trim();
+    const desc = e.t === "MINE" ? (e.memo || "") : `${fig(e).replace(/<[^>]+>/g, "")}${c.ph ? `\n대표전화 ${c.ph}` : ""}${e.src ? `\n${D.dart_url.replace("%s", e.src)}` : ""}`;
+    return ["BEGIN:VEVENT", `UID:${e.id.replace(/[^\w:.-]/g, "")}@wm-radar`, `DTSTAMP:${stamp}`, `DTSTART;VALUE=DATE:${d}`, `DTEND;VALUE=DATE:${d2}`, `SUMMARY:${z(t)}`, `DESCRIPTION:${z(desc)}`, "END:VEVENT"].join("\r\n"); });
+  download(`${name}.ics`, ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//wm-radar//KO", "CALSCALE:GREGORIAN", ...body, "END:VCALENDAR"].join("\r\n"), "text/calendar");
+  toast(`일정 ${evs.length}건을 캘린더 파일로 내보냈습니다`);
+}
+
+/* ───────── 상장사 신호 ───────── */
+const fL = {type: "FUND", q: "", stage: ""};
+function vListed() {
+  const q = fL.q;
+  const rows = ACTS.filter(s => (fL.type === "BB" ? s.t.startsWith("BB_") : s.t === fL.type))
+    .filter(s => !fL.stage || s.st === fL.stage || (fL.stage === "END" && s.t === "BB_END") || (fL.stage === "DIRECT" && s.t === "BB_DIRECT") || (fL.stage === "EXP" && s.t === "BB_EXPIRY"))
+    .filter(s => !q || [D.corps[s.cc]?.n, s.holder, s.lender, s.inst, s.mgr, s.taker].some(x => (x || "").includes(q)));
+  const dcell = r => `<span class="num">${ymd(r.d) || "–"}</span> ${ddTag(r)}`;
+  const C = {
+    FUND: [H({k: "sc", l: "우선", v: r => r.sc, h: scoreCell}), H({k: "n", l: "법인", v: r => D.corps[r.cc]?.n, h: nameCell, cls: "nm"}), H({k: "st", l: "단계", v: r => r.st, h: r => esc(STAGE[r.st])}),
+      H({k: "kind", l: "유형", v: r => r.kind}), H({k: "amt", l: "조달", r: 1, v: r => r.amt, h: r => `<span class="num">${eok(r.amt)}</span>`}),
+      H({k: "usable", l: "여유자금", r: 1, v: r => r.usable, h: r => `<b class="num">${eok(r.usable)}</b>`}), H({k: "d", l: "납입·지급일", v: r => r.d, h: dcell}),
+      H({k: "mgr", l: "주관·인수", v: r => r.mgr || r.taker, h: r => `${esc((r.mgr || r.taker || "–").slice(0, 26))}${r.ours ? ' <span class="pill ok">자사</span>' : ""}`, hide: 1}),
+      H({k: "rd", l: "공시일", v: r => r.rd, h: r => `<span class="num mute">${ymd(r.rd)}</span>`, hide: 1}), H({k: "p", l: "상태", v: r => PIPE[r.cc]?.st, h: pipeCell})],
+    BB: [H({k: "sc", l: "우선", v: r => r.sc, h: scoreCell}), H({k: "n", l: "법인", v: r => D.corps[r.cc]?.n, h: nameCell, cls: "nm"}), H({k: "t", l: "구분", v: r => T[r.t].n, h: sgn}),
+      H({k: "amt", l: "신탁금액", r: 1, v: r => r.amt, h: r => `<span class="num">${eok(r.amt)}</span>`}),
+      H({k: "inst", l: "수탁사", v: r => r.inst, h: r => `${esc(r.inst || "–")}${r.ours ? ' <span class="pill ok">자사</span>' : ""}`}), H({k: "d", l: "만기·공시일", v: r => r.d, h: dcell}),
+      H({k: "lp", l: "저PBR", v: r => (BY[r.cc] || []).find(x => x.t === "LOWPBR")?.tier, h: r => { const l = (BY[r.cc] || []).find(x => x.t === "LOWPBR"); return l ? `<span class="pill">${l.tier} · PBR ${l.pbr}</span>` : ""; }, hide: 1}),
+      H({k: "p", l: "상태", v: r => PIPE[r.cc]?.st, h: pipeCell})],
+    PLEDGE: [H({k: "sc", l: "우선", v: r => r.sc, h: scoreCell}), H({k: "n", l: "법인", v: r => D.corps[r.cc]?.n, h: nameCell, cls: "nm"}), H({k: "holder", l: "차주(보유자)", v: r => r.holder}),
+      H({k: "lender", l: "대주", v: r => r.lender, h: r => `${esc((r.lender || "").slice(0, 22))}${r.ours ? ' <span class="pill ok">자사</span>' : ""}`}),
+      H({k: "amt", l: "대출금액", r: 1, v: r => r.amt, h: r => `<b class="num">${eok(r.amt)}</b>`}), H({k: "rate", l: "금리", r: 1, v: r => r.rate, h: r => `<span class="num">${r.rate ? r.rate + "%" : "–"}</span>`}),
+      H({k: "d", l: "만기", v: r => r.d, h: dcell}), H({k: "p", l: "상태", v: r => PIPE[r.cc]?.st, h: pipeCell})],
+  }[fL.type];
+  const tb = table("listed-" + fL.type, C, rows, "sc");
+  const meta = {FUND: "조달 100억 이상 · 정정 제외 · 여유자금은 조달액에서 채무상환자금을 뺀 금액", BB: "해지·직접취득은 최근 60일, 신탁 만기는 D-90부터 경과 30일까지", PLEDGE: "10억 이상 · 만기 D-120부터 경과 30일까지 · 법인·보고자별 최신 보고 기준"}[fL.type];
+  bar("상장사 신호", meta, `<button class="btn" id="exp">${I.dl}CSV</button>`);
+  const stages = {FUND: [["", "전체"], ["new", "납입 전"], ["due", "납입 임박"], ["paid", "납입 완료"]], BB: [["", "전체"], ["END", "해지"], ["DIRECT", "직접취득"], ["EXP", "만기"]], PLEDGE: []}[fL.type];
+  $("#pane").innerHTML = `<div class="filters">
+    <div class="seg" id="lType">${[["FUND", "자금조달"], ["BB", "자사주신탁"], ["PLEDGE", "주식담보대출"]].map(([v, l]) => `<button data-v="${v}" class="${fL.type === v ? "on" : ""}">${l}</button>`).join("")}</div>
+    ${stages.length ? `<div class="seg" id="lStage">${stages.map(([v, l]) => `<button data-v="${v}" class="${fL.stage === v ? "on" : ""}">${l}</button>`).join("")}</div>` : ""}
+    <input class="txt" id="lQ" placeholder="법인·차주·대주·수탁사·주관사" value="${esc(q)}" aria-label="검색"><span class="cnt num">${rows.length.toLocaleString()}건</span></div>${tb.html}`;
+  tb.bind($("#pane"));
+  $$("#lType button").forEach(b => b.onclick = () => { fL.type = b.dataset.v; fL.stage = ""; renderView(); });
+  $$("#lStage button").forEach(b => b.onclick = () => { fL.stage = b.dataset.v; renderView(); });
+  $("#lQ").oninput = debounce(e => { fL.q = e.target.value.trim(); renderView(); const i = $("#lQ"); i.focus(); i.setSelectionRange(99, 99); }, 250);
+  $("#exp").onclick = () => csv("상장사신호_" + fL.type, [...corpCsvCols, ...sigCsvCols, ["상태", r => PIPE[r.cc]?.st]], tb.rows);
+}
+
+/* ───────── 비상장 ───────── */
+const fU = {play: "", tier: "", rg: "", ph: true, q: ""};
+function vUnlisted() {
+  const fx = cc => (BY[cc] || []).find(x => x.t === "UL_FX");
+  const base = D.signals.filter(s => s.t === "UL_CASH");
+  const rows = base.filter(s => { const c = D.corps[s.cc] || {}, tg = tagsOf(s.cc);
+    if (fU.play === "DC" && !tg.includes("UL_DC")) return false;
+    if (fU.play === "FX" && !tg.includes("UL_FX")) return false;
+    if (fU.tier && s.tier !== fU.tier) return false;
+    if (fU.rg && c.rg !== fU.rg) return false;
+    if (fU.ph && !(c.ph && c.ph !== "개인번호(비공개)")) return false;
+    if (fU.q && !((c.n || "").includes(fU.q) || (c.bz || "").replaceAll("-", "").includes(fU.q.replaceAll("-", "")))) return false;
+    return true; });
+  const rgs = [...new Set(base.map(s => D.corps[s.cc]?.rg).filter(Boolean))].sort();
+  const cols = [H({k: "n", l: "법인", v: r => D.corps[r.cc]?.n, h: nameCell, cls: "nm"}), H({k: "tier", l: "등급", v: r => r.tier, h: r => `<span class="pill">${r.tier}</span>`}),
+    H({k: "amt", l: "현금성자산", r: 1, v: r => r.amt, h: r => `<b class="num">${eok(r.amt)}</b>`}), H({k: "pension", l: "퇴직연금", v: r => r.pension}),
+    H({k: "fx", l: "외화", r: 1, v: r => fx(r.cc)?.amt, h: r => `<span class="num">${fx(r.cc) ? eok(fx(r.cc).amt) : "–"}</span>`}),
+    H({k: "rg", l: "지역", v: r => D.corps[r.cc]?.rg}), H({k: "ph", l: "대표전화", v: r => D.corps[r.cc]?.ph, h: r => `<span class="num">${esc(D.corps[r.cc]?.ph || "–")}</span>`, hide: 1}),
+    H({k: "bz", l: "사업자번호", v: r => D.corps[r.cc]?.bz, h: r => `<span class="num mute">${esc(D.corps[r.cc]?.bz || "–")}</span>`, hide: 1}),
+    H({k: "rd", l: "감사보고서", v: r => r.rd, h: r => `<span class="num mute">${ymd(r.rd)}</span>`, hide: 1}), H({k: "p", l: "상태", v: r => PIPE[r.cc]?.st, h: pipeCell})];
+  const tb = table("unlisted", cols, rows, "amt");
+  bar("비상장 법인", "외부감사 대상 법인 · 감사보고서 원문 기준(교차검증 통과, 현금성 30억 이상)", `<button class="btn" id="exp">${I.dl}CSV</button>`);
+  $("#pane").innerHTML = `<div class="filters">
+    <div class="seg" id="uPlay">${[["", "여유자금"], ["DC", "퇴직연금 DC 대상"], ["FX", "외화RP 대상"]].map(([v, l]) => `<button data-v="${v}" class="${fU.play === v ? "on" : ""}">${l}</button>`).join("")}</div>
+    <select class="sel" id="uTier" aria-label="등급"><option value="">등급 전체</option>${[["S", "S · 100억 이상"], ["A", "A · 50~100억"], ["B", "B · 30~50억"]].map(([v, l]) => `<option value="${v}" ${fU.tier === v ? "selected" : ""}>${l}</option>`).join("")}</select>
+    <select class="sel" id="uRg" aria-label="지역"><option value="">지역 전체</option>${rgs.map(r => `<option ${fU.rg === r ? "selected" : ""}>${esc(r)}</option>`).join("")}</select>
+    <button class="chip ${fU.ph ? "on" : ""}" id="uPh">대표전화 있음</button>
+    <input class="txt" id="uQ" placeholder="법인명·사업자번호" value="${esc(fU.q)}" aria-label="검색"><span class="cnt num">${rows.length.toLocaleString()}개사</span></div>${tb.html}`;
+  tb.bind($("#pane"));
+  $$("#uPlay button").forEach(b => b.onclick = () => { fU.play = b.dataset.v; renderView(); });
+  $("#uTier").onchange = e => { fU.tier = e.target.value; renderView(); };
+  $("#uRg").onchange = e => { fU.rg = e.target.value; renderView(); };
+  $("#uPh").onclick = () => { fU.ph = !fU.ph; renderView(); };
+  $("#uQ").oninput = debounce(e => { fU.q = e.target.value.trim(); renderView(); const i = $("#uQ"); i.focus(); i.setSelectionRange(99, 99); }, 300);
+  $("#exp").onclick = () => csv("비상장법인", [...corpCsvCols, ["등급", r => r.tier], ["현금성자산(억)", r => Math.round(r.amt / 1e8)], ["퇴직연금", r => r.pension],
+    ["외화(억)", r => fx(r.cc) ? Math.round(fx(r.cc).amt / 1e8) : ""], ["감사보고서", r => r.rd], ["DART", r => D.dart_url.replace("%s", r.src)], ["상태", r => PIPE[r.cc]?.st]], tb.rows);
+}
+
+/* ───────── 저PBR ───────── */
+const fP = {tier: "", trig: false};
+function vLowpbr() {
+  const trig = cc => (BY[cc] || []).filter(x => ACTION.has(x.t));
+  const rows = D.signals.filter(s => s.t === "LOWPBR" && (!fP.tier || s.tier === fP.tier) && (!fP.trig || trig(s.cc).length));
+  const n0 = v => v == null ? "–" : Math.round(v).toLocaleString();
+  const cols = [H({k: "n", l: "법인", v: r => D.corps[r.cc]?.n, h: nameCell, cls: "nm"}), H({k: "tier", l: "등급", v: r => r.tier, h: r => `<span class="pill">${r.tier}</span>`}),
+    H({k: "pbr", l: "PBR", r: 1, v: r => r.pbr, h: r => `<span class="num">${r.pbr}</span>`}), H({k: "mcap", l: "시총(억)", r: 1, v: r => r.mcap, h: r => `<span class="num">${n0(r.mcap)}</span>`, hide: 1}),
+    H({k: "limit", l: "취득한도(억)", r: 1, v: r => r.limit, h: r => `<b class="num">${n0(r.limit)}</b>`}), H({k: "cash", l: "현금성(억)", r: 1, v: r => r.cash, h: r => `<span class="num">${n0(r.cash)}</span>`, hide: 1}),
+    H({k: "bps10", l: "10% 매입 시 BPS", r: 1, v: r => r.bps10, h: r => `<span class="num">${r.bps10 != null ? "+" + r.bps10 + "%" : "–"}</span>`, hide: 1}),
+    H({k: "trig", l: "지금 걸린 신호", v: r => trig(r.cc).length || null, h: r => trig(r.cc).map(sgn).join(" &nbsp;") || '<span class="faint">없음</span>'}),
+    H({k: "p", l: "상태", v: r => PIPE[r.cc]?.st, h: pipeCell})];
+  const tb = table("lowpbr", cols, rows, "limit");
+  bar("저PBR 자사주", "자사주 매입 여력 S·A 등급. 지금 공시 신호까지 걸린 곳이 1순위", `<button class="btn" id="exp">${I.dl}CSV</button>`);
+  $("#pane").innerHTML = `<div class="filters"><div class="seg" id="pTier">${[["", "S·A"], ["S", "S"], ["A", "A"]].map(([v, l]) => `<button data-v="${v}" class="${fP.tier === v ? "on" : ""}">${l}</button>`).join("")}</div>
+    <button class="chip ${fP.trig ? "on" : ""}" id="pTrig">신호 걸린 곳만 <span class="n num">${D.signals.filter(s => s.t === "LOWPBR" && trig(s.cc).length).length}</span></button><span class="cnt num">${rows.length}개사</span></div>${tb.html}`;
+  tb.bind($("#pane"));
+  $$("#pTier button").forEach(b => b.onclick = () => { fP.tier = b.dataset.v; renderView(); });
+  $("#pTrig").onclick = () => { fP.trig = !fP.trig; renderView(); };
+  $("#exp").onclick = () => csv("저PBR", [...corpCsvCols, ["등급", r => r.tier], ["PBR", r => r.pbr], ["취득한도(억)", r => r.limit], ["현금성(억)", r => r.cash], ["신호", r => trig(r.cc).map(x => T[x.t].n).join("/")]], tb.rows);
+}
+
+/* ───────── 금리·시장 ───────── */
+const fM = {sel: ["010502000", "010200000", "010101000"], days: 365};
+const calc = store.get("wmr-calc", {amt: 100, days: 30, code: "010502000"});
+function rateAt(r, back) { const s = r.series, target = addDays(s.at(-1)[0], -back); let p = s[0]; for (const x of s) { if (x[0] <= target) p = x; else break; } return p[1]; }
+function vMarket() {
+  const m = D.market || {}, R = m.rates || [];
+  bar("금리·시장", `국내 금리는 한국은행 ECOS 일별 확정치 · 지수는 ${md(m.asof)} 종가`);
+  const spark = r => { const s = r.series.slice(-60), lo = Math.min(...s.map(x => x[1])), hi = Math.max(...s.map(x => x[1])), w = 70, h = 18;
+    const pts = s.map((x, i) => [(i / (s.length - 1) * w), (h - 2 - (x[1] - lo) / ((hi - lo) || 1) * (h - 4))]);
+    return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><polyline points="${pts.map(p => p.map(v => v.toFixed(1)).join(",")).join(" ")}" fill="none" stroke="var(--ink-2)" stroke-width="1.2"/><circle cx="${pts.at(-1)[0].toFixed(1)}" cy="${pts.at(-1)[1].toFixed(1)}" r="1.8" fill="var(--accent)"/></svg>`; };
+  const bp = (a, b) => { const v = Math.round((a - b) * 100); return `<span class="num ${v > 0 ? "up" : v < 0 ? "down" : "mute"}">${v > 0 ? "+" : ""}${v}</span>`; };
+  $("#pane").innerHTML = `<div class="mk">
+    <div class="box idx">${(m.idx || []).map(x => `<div><div class="l">${esc(x.n)}</div><div class="v num">${Number(x.v).toLocaleString("ko-KR", {maximumFractionDigits: 2})}</div><div class="l num"><span class="${x.pct > 0 ? "up" : x.pct < 0 ? "down" : ""}">${x.pct > 0 ? "+" : ""}${x.pct?.toFixed(2)}%</span></div></div>`).join("")}</div>
+    <div class="mkgrid">
+      <div class="box"><div class="bh">시장금리 <span class="mute">행을 누르면 차트에 추가·제거</span></div><div class="tw">
+        <table><thead><tr><th>금리</th><th class="r">현재(%)</th><th class="r">1주 bp</th><th class="r">1개월 bp</th><th class="r hide-m">1년 bp</th><th class="hide-m">60일 추이</th><th class="r">기준일</th></tr></thead><tbody>
+        ${R.map(r => { const [d, v] = r.series.at(-1); return `<tr data-code="${r.code}" class="${fM.sel.includes(r.code) ? "on" : ""}"><td><b>${esc(r.n)}</b></td><td class="r"><b class="num">${v.toFixed(2)}</b></td>
+          <td class="r">${bp(v, rateAt(r, 7))}</td><td class="r">${bp(v, rateAt(r, 30))}</td><td class="r hide-m">${bp(v, rateAt(r, 365))}</td><td class="hide-m">${spark(r)}</td><td class="r num mute">${md(d)}</td></tr>`; }).join("")}
+        </tbody></table></div></div>
+      <div style="display:grid;gap:14px;align-content:start;min-width:0">
+        <div class="box"><div class="bh">추이 <span style="flex:1"></span><div class="seg" id="mDays">${[[90, "3개월"], [180, "6개월"], [365, "1년"]].map(([v, l]) => `<button data-v="${v}" class="${fM.days === v ? "on" : ""}">${l}</button>`).join("")}</div></div>
+          <div class="chart" id="mChart"></div><div class="legend" id="mLeg"></div></div>
+        <div class="box"><div class="bh">운용 이자 참고 계산 <span class="mute">시장금리 기준 · 세전 · 상품 금리 아님</span></div>
+          <div class="calcf"><label for="cAmt">금액(억원)<input id="cAmt" type="number" min="0" step="1" value="${calc.amt}"></label>
+            <label for="cDays">기간(일)<input id="cDays" type="number" min="1" step="1" value="${calc.days}"></label>
+            <label for="cCode">기준 금리<select id="cCode">${R.map(r => `<option value="${r.code}" ${calc.code === r.code ? "selected" : ""}>${esc(r.n)}</option>`).join("")}</select></label></div>
+          <div class="calcr" id="cOut"></div></div>
+      </div></div></div>`;
+  $$("#pane tr[data-code]").forEach(tr => tr.onclick = () => { const c = tr.dataset.code; fM.sel = fM.sel.includes(c) ? fM.sel.filter(x => x !== c) : [...fM.sel, c].slice(-4); tr.classList.toggle("on", fM.sel.includes(c)); drawChart(); });
+  $$("#mDays button").forEach(b => b.onclick = () => { fM.days = +b.dataset.v; $$("#mDays button").forEach(x => x.classList.toggle("on", x === b)); drawChart(); });
+  const upd = () => { calc.amt = Math.max(0, +$("#cAmt").value || 0); calc.days = Math.max(0, +$("#cDays").value || 0); calc.code = $("#cCode").value; store.set("wmr-calc", calc);
+    const r = R.find(x => x.code === calc.code); if (!r) return; const v = r.series.at(-1)[1], amt = calc.amt * 1e8, it = amt * v / 100 * calc.days / 365;
+    const call = R.find(x => x.code === "010101000"), cv = call ? call.series.at(-1)[1] : null;
+    $("#cOut").innerHTML = `<b class="num">${won(it)}</b> &nbsp;<span class="mute num">${calc.amt.toLocaleString()}억 × ${v.toFixed(2)}% × ${calc.days}/365</span>
+      ${cv != null && calc.code !== "010101000" ? `<br>콜금리(${cv.toFixed(2)}%)로 두었을 때와의 차이 <span class="num">${v >= cv ? "+" : "−"}${won(Math.abs(amt * (v - cv) / 100 * calc.days / 365))}</span>` : ""}`; };
+  ["cAmt", "cDays", "cCode"].forEach(id => $("#" + id).oninput = upd); upd();
+  drawChart();
+}
+function drawChart() {
+  const box = $("#mChart"); if (!box) return;
+  const cs = getComputedStyle(document.documentElement), pal = ["--c-fund", "--c-pl", "--c-ul", "--c-bb"].map(v => cs.getPropertyValue(v).trim());
+  const from = addDays(TODAY, -fM.days);
+  const ser = (D.market?.rates || []).filter(r => fM.sel.includes(r.code)).map((r, i) => ({n: r.n, c: pal[i % 4], p: r.series.filter(([d]) => d >= from)}));
+  $("#mLeg").innerHTML = ser.map(s => `<span><i style="background:${s.c}"></i>${esc(s.n)} <b class="num">${s.p.at(-1)?.[1].toFixed(2) ?? "–"}</b></span>`).join("");
+  if (!ser.length || !ser[0].p.length) { box.innerHTML = '<div class="empty">왼쪽 표에서 금리를 고르세요</div>'; return; }
+  const W = Math.max(300, box.clientWidth - 16), Hh = 240, L = 36, Rr = 10, Tp = 8, B = 20;
+  const ds = [...new Set(ser.flatMap(s => s.p.map(p => p[0])))].sort(), pos = new Map(ds.map((d, i) => [d, i]));
+  const all = ser.flatMap(s => s.p.map(p => p[1]));
+  let lo = Math.min(...all), hi = Math.max(...all); const step = (hi - lo) > 1.2 ? .5 : (hi - lo) > .5 ? .25 : .1;
+  lo = Math.floor(lo / step) * step; hi = Math.ceil(hi / step) * step; if (hi - lo < step) hi = lo + step;
+  const x = d => L + (W - L - Rr) * pos.get(d) / Math.max(1, ds.length - 1), y = v => Tp + (Hh - Tp - B) * (1 - (v - lo) / (hi - lo));
+  const ticks = []; for (let t = lo; t <= hi + 1e-9; t += step) ticks.push(+t.toFixed(3));
+  const mons = ds.filter((d, i) => i === 0 || d.slice(5, 7) !== ds[i - 1].slice(5, 7)), every = Math.ceil(mons.length / 6);
+  box.innerHTML = `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="금리 추이">
+    ${ticks.map(t => `<line x1="${L}" x2="${W - Rr}" y1="${y(t)}" y2="${y(t)}" stroke="var(--line-2)"/><text x="${L - 6}" y="${y(t) + 3.5}" text-anchor="end" font-size="10" fill="var(--mute)">${t.toFixed(2)}</text>`).join("")}
+    ${mons.filter((_, i) => i % every === 0).map(d => `<text x="${Math.max(L + 12, x(d))}" y="${Hh - 5}" font-size="10" fill="var(--mute)" text-anchor="middle">${d.slice(2, 4)}.${d.slice(5, 7)}</text>`).join("")}
+    ${ser.map(s => `<polyline fill="none" stroke="${s.c}" stroke-width="1.6" points="${s.p.map(([d, v]) => `${x(d).toFixed(1)},${y(v).toFixed(1)}`).join(" ")}"/>`).join("")}
+    ${ser.map(s => { const [d, v] = s.p.at(-1); return `<circle cx="${x(d)}" cy="${y(v)}" r="2.5" fill="${s.c}"/>`; }).join("")}
+    <line id="mX" y1="${Tp}" y2="${Hh - B}" stroke="var(--faint)" stroke-dasharray="2 3" visibility="hidden"/></svg><div class="tip" id="mTip" hidden></div>`;
+  const svg = box.querySelector("svg"), tip = $("#mTip"), xl = $("#mX");
+  const mv = ev => { const r = svg.getBoundingClientRect(), px = ((ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left) * W / r.width;
+    const i = Math.max(0, Math.min(ds.length - 1, Math.round((px - L) / (W - L - Rr) * (ds.length - 1)))), d = ds[i];
+    xl.setAttribute("x1", x(d)); xl.setAttribute("x2", x(d)); xl.setAttribute("visibility", "visible");
+    tip.innerHTML = `<b class="num">${ymd(d)}</b>${ser.map(s => { const p = s.p.find(q => q[0] === d); return `<div><span style="color:${s.c}">■</span> ${esc(s.n)} <span class="num">${p ? p[1].toFixed(3) : "–"}</span></div>`; }).join("")}`;
+    tip.hidden = false; const tx = x(d) * r.width / W; tip.style.left = Math.max(4, Math.min(tx + 12, r.width - 150)) + "px"; tip.style.top = "12px"; };
+  svg.addEventListener("mousemove", mv); svg.addEventListener("touchstart", mv, {passive: true}); svg.addEventListener("touchmove", mv, {passive: true});
+  svg.addEventListener("mouseleave", () => { tip.hidden = true; xl.setAttribute("visibility", "hidden"); });
+}
+window.addEventListener("resize", debounce(() => view === "market" && drawChart(), 150));
+
+/* ───────── 내 파이프라인 ───────── */
+const fPp = {st: "", star: false};
+function vPipe() {
+  const all = [...new Set([...Object.keys(PIPE), ...STAR])].filter(cc => D.corps[cc]);
+  const rows = all.map(cc => ({cc, ...(PIPE[cc] || {})})).filter(r => (!fPp.st || r.st === fPp.st) && (!fPp.star || STAR.has(r.cc)));
+  const cnt = s => all.filter(cc => PIPE[cc]?.st === s).length;
+  const cols = [H({k: "n", l: "법인", v: r => D.corps[r.cc]?.n, h: r => `${STAR.has(r.cc) ? '<span class="gold">★</span> ' : ""}${esc(D.corps[r.cc].n)}`, cls: "nm"}),
+    H({k: "st", l: "상태", v: r => r.st, h: r => r.st ? `<span class="pill ${r.st === "성사" ? "ok" : "ac"}">${esc(r.st)}</span>` : '<span class="faint">–</span>'}),
+    H({k: "next", l: "다음 연락", v: r => r.next || null, h: r => !r.next ? "" : r.next < TODAY ? `<span class="pill hot num">${ymd(r.next)}</span>` : r.next === TODAY ? '<span class="pill hot">오늘</span>' : `<span class="num">${ymd(r.next)}</span>`}),
+    H({k: "memo", l: "메모", v: r => r.memo, h: r => `<span class="mute">${esc((r.memo || "").slice(0, 70))}</span>`, cls: "wrap"}),
+    H({k: "sig", l: "현재 신호", v: r => (BY[r.cc] || [])[0]?.sc, h: r => (BY[r.cc] || []).filter(s => ACTION.has(s.t)).slice(0, 2).map(sgn).join(" &nbsp;") || '<span class="faint">–</span>', hide: 1}),
+    H({k: "at", l: "수정", v: r => r.at, h: r => `<span class="num mute">${(r.at || "").slice(5, 10).replace("-", "/")}</span>`, hide: 1})];
+  const tb = table("pipe", cols, rows, "next", 1);
+  bar("내 파이프라인", "이 브라우저에만 저장됩니다. 기기를 옮길 때는 CSV로 내보내고 가져오세요",
+    `<label class="btn" for="pImp">${I.up}가져오기<input type="file" id="pImp" accept=".csv" hidden></label><button class="btn" id="exp">${I.dl}CSV</button>`);
+  $("#pane").innerHTML = `<div class="filters"><button class="chip ${!fPp.st && !fPp.star ? "on" : ""}" data-st="">전체 <span class="n num">${all.length}</span></button>
+    <button class="chip ${fPp.star ? "on" : ""}" id="pStar"><span class="gold">★</span> 관심 <span class="n num">${STAR.size}</span></button>
+    ${PSTAT.map(s => `<button class="chip ${fPp.st === s ? "on" : ""}" data-st="${s}">${s} <span class="n num">${cnt(s)}</span></button>`).join("")}</div>
+    ${rows.length ? tb.html : '<div class="empty">아직 기록이 없습니다.<br>법인을 열어 상태나 다음 연락일을 정하거나 ★를 누르면 여기에 모입니다.</div>'}`;
+  if (rows.length) tb.bind($("#pane"));
+  $$("[data-st]").forEach(b => b.onclick = () => { fPp.st = b.dataset.st; fPp.star = false; renderView(); });
+  $("#pStar").onclick = () => { fPp.star = !fPp.star; fPp.st = ""; renderView(); };
+  $("#exp").onclick = () => csv(`파이프라인_${ME.id}`, [["corp_code", r => r.cc], ...corpCsvCols, ["관심", r => STAR.has(r.cc) ? "Y" : ""], ["상태", r => r.st], ["다음연락", r => r.next], ["메모", r => r.memo], ["수정", r => r.at]], rows);
+  $("#pImp").onchange = async e => {
+    const f = e.target.files[0]; if (!f) return;
+    const lines = (await f.text()).replace(/^﻿/, "").split(/\r?\n/).filter(Boolean), hdr = parseCsv(lines.shift());
+    const ix = k => hdr.indexOf(k); let n = 0;
+    if (ix("corp_code") < 0) { toast("이 사이트에서 내보낸 파이프라인 CSV가 아닙니다"); return; }
+    for (const ln of lines) { const c = parseCsv(ln), cc = c[ix("corp_code")]; if (!cc || !D.corps[cc]) continue;
+      if (c[ix("관심")] === "Y") STAR.add(cc);
+      if (c[ix("상태")] || c[ix("메모")] || c[ix("다음연락")]) PIPE[cc] = {st: c[ix("상태")] || "", next: c[ix("다음연락")] || "", memo: c[ix("메모")] || "", at: c[ix("수정")] || new Date().toISOString()};
+      n++; }
+    savePipe(); saveStar(); toast(`${n}개 법인을 가져왔습니다`); renderNav(); renderView();
+  };
+}
+function parseCsv(line) { const out = []; let cur = "", q = false;
+  for (let i = 0; i < line.length; i++) { const ch = line[i];
+    if (q) { if (ch === '"' && line[i + 1] === '"') { cur += '"'; i++; } else if (ch === '"') q = false; else cur += ch; }
+    else if (ch === '"') q = true; else if (ch === ",") { out.push(cur); cur = ""; } else cur += ch; }
+  out.push(cur); return out; }
+
+/* ───────── 법인 상세 ───────── */
+function renderDetail() {
+  const el = $("#detail");
+  $$("#pane tbody tr[data-cc]").forEach(tr => tr.classList.toggle("on", tr.dataset.cc === SEL));
+  el.classList.toggle("open", !!SEL);
+  $("#work").classList.toggle("wide", ["cal", "market"].includes(view) && !SEL);
+  if (!SEL) { el.innerHTML = `<div class="dempty"><div>목록에서 법인을 고르면<br>연락처, 신호별 멘트, 메일 초안이 여기에 나옵니다.<br><span class="faint">J·K로 이동 · Ctrl K로 검색</span></div></div>`; return; }
+  const cc = SEL, c = D.corps[cc], ss = BY[cc] || [], p = PIPE[cc] || {};
+  const prods = [...new Set(ss.flatMap(s => s.prod || []))];
+  const cdR = (D.market?.rates || []).find(r => r.code === "010502000"), cd = cdR ? cdR.series.at(-1)[1] : null;
+  const kvs = s => {
+    const k = [];
+    if (s.t === "FUND") { k.push(["유형", s.kind], ["조달금액", eok(s.amt)], ["여유자금", eok(s.usable)], [s.dl || "납입일", s.d ? ymd(s.d) : "미기재"]);
+      if (s.uses) k.push(["자금용도", Object.entries(s.uses).map(([a, v]) => `${{facility: "시설", oper: "운영", debt: "채무상환", bizacq: "영업양수", secacq: "타법인증권", etc: "기타"}[a] || a} ${eok(v)}`).join(", ")]);
+      if (s.mgr) k.push(["주관사", s.mgr]); if (s.taker) k.push(["인수자", s.taker]); }
+    if (s.t === "BB_EXPIRY") k.push(["신탁금액", eok(s.amt)], ["계약기간", `${ymd(s.start)} ~ ${ymd(s.d)}`], ["수탁사", s.inst], ["목적", s.purpose]);
+    if (s.t === "PLEDGE") k.push(["차주", s.holder], ["대주", s.lender], ["대출금액", eok(s.amt)], ["금리", s.rate ? s.rate + "%" : "미기재"], ["담보유지비율", s.keep ? s.keep + "%" : "미기재"], ["만기", ymd(s.d)]);
+    if (s.t === "UL_CASH") k.push(["현금성자산", eok(s.cash)], ["단기금융상품", s.stf ? eok(s.stf) : "–"], ["퇴직연금", s.pension], ["등급", s.tier]);
+    if (s.t === "UL_FX") k.push(["USD", (s.usd ?? 0) + "억"], ["JPY", (s.jpy ?? 0) + "억"], ["외화 비중", s.ratio != null ? Math.round(s.ratio * 100) + "%" : "–"]);
+    if (s.t === "UL_DC") k.push(["퇴직연금", s.pension]);
+    if (s.t === "LOWPBR") k.push(["PBR", s.pbr], ["재무등급", s.grade], ["취득한도", Math.round(s.limit || 0).toLocaleString() + "억"], ["현금성자산", Math.round(s.cash || 0).toLocaleString() + "억"], ["10% 매입 시", `EPS +${s.eps10}% · BPS +${s.bps10}%`]);
+    if (s.t === "BB_END" || s.t === "BB_DIRECT") k.push(["공시", title(s)]);
+    if (s.rd) k.push([["BB_END", "BB_DIRECT"].includes(s.t) ? "공시일" : s.t.startsWith("UL_") ? "감사보고서" : "공시·보고일", ymd(s.rd)]);
+    return `<dl class="kv">${k.filter(x => x[1] != null && x[1] !== "").map(([a, b]) => `<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join("")}</dl>`;
+  };
+  const fundCalc = s => s.t !== "FUND" || !cd || !s.usable ? "" :
+    `<div class="calc">여유자금 ${eok(s.usable)}을 30일 운용하면 CD 91일(${cd.toFixed(2)}%) 기준 약 <b class="num">${won(s.usable * cd / 100 * 30 / 365)}</b> <span class="faint">세전 참고치</span></div>`;
+  const tl = ss.filter(s => s.rd || s.d).map(s => ({d: s.t.startsWith("UL_") || s.t === "LOWPBR" ? s.rd : (s.d || s.rd), s})).filter(x => x.d).sort((a, b) => b.d.localeCompare(a.d));
+  el.innerHTML = `<div class="dh"><div class="t"><button class="ib back" id="dBack" aria-label="목록으로">${I.back}</button><h2>${esc(c.n)}</h2>
+      <button class="star ${STAR.has(cc) ? "on" : ""}" id="dStar" title="관심 법인 (S)" style="font-size:16px">${STAR.has(cc) ? "★" : "☆"}</button><span style="flex:1"></span>
+      <button class="ib hide-m" id="dClose" aria-label="닫기">${I.x}</button></div>
+    <div class="m">${[MK[c.mk] && esc(MK[c.mk]), c.sc && `<span class="num">${esc(c.sc)}</span>`, c.rg && esc(c.rg), c.ceo && "대표 " + esc(c.ceo)].filter(Boolean).join(" · ")}</div></div>
+  <div class="dsec"><dl class="kv">
+    ${c.ph ? `<dt>대표전화</dt><dd><span class="num">${esc(c.ph)}</span>${c.ph !== "개인번호(비공개)" ? ` <button class="cp" data-cp="${esc(c.ph)}" title="복사" aria-label="대표전화 복사">${I.copy}</button>` : ""}</dd>` : ""}
+    ${c.bz ? `<dt>사업자번호</dt><dd><span class="num">${esc(c.bz)}</span> <button class="cp" data-cp="${esc(c.bz)}" title="복사" aria-label="사업자번호 복사">${I.copy}</button></dd>` : ""}
+    ${c.hp ? `<dt>홈페이지</dt><dd><a href="${esc(/^https?:/.test(c.hp) ? c.hp : "http://" + c.hp)}" target="_blank" rel="noopener noreferrer">${esc(c.hp.replace(/^https?:\/\//, ""))}</a></dd>` : ""}
+    <dt>제안 상품</dt><dd><div class="prods">${prods.map(x => `<span class="pill">${esc(x)}</span>`).join("")}</div></dd></dl></div>
+  <div class="dsec"><h3>내 기록 <span class="saved" id="dSaved"></span></h3><div class="rec">
+    <div class="row"><select class="sel" id="dSt" aria-label="상태"><option value="">상태 없음</option>${PSTAT.map(s => `<option ${p.st === s ? "selected" : ""}>${s}</option>`).join("")}</select>
+      <input type="date" id="dNext" value="${esc(p.next || "")}" aria-label="다음 연락일">
+      ${[[1, "내일"], [3, "3일 뒤"], [7, "1주 뒤"]].map(([n, l]) => `<button class="btn" data-nx="${n}">${l}</button>`).join("")}</div>
+    <textarea id="dMemo" placeholder="통화 내용, 상대 담당자, 다음 할 일" aria-label="메모">${esc(p.memo || "")}</textarea></div></div>
+  <div class="dsec"><h3>신호 <span class="num">${ss.length}</span></h3>
+    ${ss.map((s, i) => `<div class="sig"><div class="h">${sgn(s)}${s.ours ? '<span class="pill ok">자사 계약</span>' : ""}${NEW.has(s.id) ? '<span class="pill ac">신규</span>' : ""}${ddTag(s)}<span class="sc num" title="${esc((s.why || []).join("\n"))}">우선 ${s.sc}</span></div>
+      ${kvs(s)}${fundCalc(s)}<div class="talk">${esc(talk(s, c))}</div>
+      <div class="acts"><button class="btn" data-copy="${i}">${I.copy}멘트 복사</button><button class="btn" data-mail="${i}">${I.mail}메일 초안</button>
+        ${s.d && ACTION.has(s.t) && dday(s.d) >= 0 ? `<button class="btn" data-ics="${i}">${I.cal}캘린더</button>` : ""}
+        ${s.src ? `<a class="btn" href="${esc(D.dart_url.replace("%s", s.src))}" target="_blank" rel="noopener noreferrer">${I.ext}DART 원문</a>` : ""}</div>
+      <div class="why">${esc((s.why || []).join(" · "))}</div></div>`).join("")}</div>
+  ${tl.length > 1 ? `<div class="dsec"><h3>타임라인</h3><ul class="tl">${tl.map(({d, s}) => `<li><span class="num">${ymd(d)}</span><span>${esc(T[s.t].n)}${s.st ? " · " + esc(STAGE[s.st]) : ""}${s.amt ? " · " + eok(s.amt) : ""}</span></li>`).join("")}</ul></div>` : ""}
+  <div class="notice">숫자는 공시와 감사보고서 원문에서 자동으로 읽은 값입니다. 고객에게 말하기 전에 DART 원문을 확인하세요. 투자권유 시 적합성·설명의무 절차를 따르고, 수익을 보장하는 표현은 쓰지 마세요. 대주주 개인 정보는 영업 목적 외로 쓰지 마세요.</div>`;
+  el.scrollTop = 0;
+  const save = () => { const st = $("#dSt").value, next = $("#dNext").value, memo = $("#dMemo").value;
+    if (!st && !next && !memo.trim()) delete PIPE[cc]; else PIPE[cc] = {st, next, memo, at: new Date().toISOString()};
+    savePipe(); const s = $("#dSaved"); s.textContent = "저장됨"; setTimeout(() => { if (s.isConnected) s.textContent = ""; }, 1200);
+    renderNav(); refreshRow(cc); };
+  $("#dSt").onchange = save; $("#dNext").onchange = save; $("#dMemo").oninput = debounce(save, 600);
+  $$("[data-nx]").forEach(b => b.onclick = () => { $("#dNext").value = addDays(TODAY, +b.dataset.nx); save(); });
+  $("#dStar").onclick = () => toggleStar(cc);
+  $("#dClose").onclick = () => go(view); $("#dBack").onclick = () => go(view);
+  $$("[data-cp]").forEach(b => b.onclick = () => copy(b.dataset.cp));
+  $$("[data-copy]").forEach(b => b.onclick = () => copy(talk(ss[+b.dataset.copy], c), "멘트를 복사했습니다"));
+  $$("[data-mail]").forEach(b => b.onclick = () => { const m = mail(ss[+b.dataset.mail], c); copy(`제목: ${m.subj}\n\n${m.body}`, "메일 초안을 복사했습니다"); });
+  $$("[data-ics]").forEach(b => b.onclick = () => { const s = ss[+b.dataset.ics]; ics(`${c.n}_${T[s.t].n}`, [s]); });
+}
+function refreshRow(cc) {
+  if (!["today", "listed", "unlisted", "lowpbr"].includes(view)) { if (view === "pipe") renderView(); return; }
+  $$(`#pane tr[data-cc="${CSS.escape(cc)}"]`).forEach(tr => { const td = tr.lastElementChild; if (td) td.innerHTML = pipeCell({cc}); });
+}
+function toggleStar(cc) {
+  STAR.has(cc) ? STAR.delete(cc) : STAR.add(cc); saveStar(); renderDetail(); renderNav();
+  if (view === "pipe") renderView(); else $$(`#pane tr[data-cc="${CSS.escape(cc)}"] td.nm`).forEach(td => { const r = (BY[cc] || [])[0] || {cc}; td.innerHTML = nameCell({...r, cc}); });
+  toast(STAR.has(cc) ? "관심 법인에 추가했습니다" : "관심 법인에서 뺐습니다");
+}
+
+/* ───────── 명령 팔레트 ───────── */
+let NAMES = null, palIdx = 0, palItems = [];
+function openPal() { $("#pal").hidden = false; $("#palQ").value = ""; palRender(""); $("#palQ").focus(); }
+function closePal() { $("#pal").hidden = true; }
+function palRender(q) {
+  NAMES ||= Object.values(D.corps).map(c => ({cc: c.cc, n: c.n || "", sc: c.sc || "", bz: (c.bz || "").replaceAll("-", ""), top: c.top || 0}));
+  const qq = q.trim().replaceAll("-", "");
+  const corps = qq ? NAMES.filter(x => x.n.includes(qq) || x.sc === qq || (qq.length >= 5 && x.bz.startsWith(qq))).sort((a, b) => (b.n.startsWith(qq) - a.n.startsWith(qq)) || b.top - a.top).slice(0, 10)
+    : [...STAR].filter(cc => D.corps[cc]).slice(0, 6).map(cc => NAMES.find(x => x.cc === cc));
+  const views = VIEWS.filter(([, l]) => !qq || l.includes(qq));
+  palItems = [...corps.map(x => ({k: "c", v: x.cc, h: `<span>${esc(x.n)}</span><span class="k">${tagsOf(x.cc).slice(0, 3).map(t => T[t].n).join(" · ")}</span>`})),
+    ...views.map(([k, l, ic]) => ({k: "v", v: k, h: `${ic}<span>${l}</span><span class="k"><kbd>${VIEWS.findIndex(v => v[0] === k) + 1}</kbd></span>`}))];
+  palIdx = 0;
+  $("#palR").innerHTML = (corps.length ? `<div class="gh">${qq ? "법인" : "관심 법인"}</div>` : "") + palItems.filter(x => x.k === "c").map((x, i) => `<div class="it ${i === 0 ? "on" : ""}" data-i="${i}">${x.h}</div>`).join("")
+    + (views.length ? '<div class="gh">메뉴</div>' : "") + palItems.filter(x => x.k === "v").map((x, j) => { const i = corps.length + j; return `<div class="it ${i === 0 ? "on" : ""}" data-i="${i}">${x.h}</div>`; }).join("")
+    + (!palItems.length ? '<div class="empty" style="padding:20px">찾는 법인이 없습니다</div>' : "");
+  $$("#palR .it").forEach(d => d.onclick = () => palGo(+d.dataset.i));
+}
+function palGo(i) { const it = palItems[i]; if (!it) return; closePal(); if (it.k === "c") go(["cal", "market"].includes(view) ? "today" : view, it.v); else go(it.v); }
+$("#palQ").addEventListener("input", e => palRender(e.target.value));
+$("#palQ").addEventListener("keydown", e => {
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); if (!palItems.length) return; palIdx = (palIdx + (e.key === "ArrowDown" ? 1 : -1) + palItems.length) % palItems.length;
+    $$("#palR .it").forEach(d => d.classList.toggle("on", +d.dataset.i === palIdx)); $(`#palR .it[data-i="${palIdx}"]`)?.scrollIntoView({block: "nearest"}); }
+  if (e.key === "Enter") palGo(palIdx);
+  if (e.key === "Escape") closePal();
+});
+$("#pal").addEventListener("click", e => { if (e.target.id === "pal") closePal(); });
+$("#findBtn").onclick = openPal;
+
+/* ───────── 키보드 ───────── */
+document.addEventListener("keydown", e => {
+  if (!D) return;
+  const typing = e.target.closest("input,textarea,select");
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); openPal(); return; }
+  if (e.key === "Escape") { if (!$("#keys").hidden) $("#keys").hidden = true; else if (!$("#pal").hidden) closePal(); else if (SEL && !typing) go(view); return; }
+  if (typing || e.ctrlKey || e.metaKey || e.altKey || !$("#pal").hidden) return;
+  if (e.key === "/") { e.preventDefault(); openPal(); }
+  else if (e.key === "?") $("#keys").hidden = !$("#keys").hidden;
+  else if (/^[1-7]$/.test(e.key)) go(VIEWS[+e.key - 1][0]);
+  else if (e.key === "j" || e.key === "k") {
+    const ids = [...new Set($$("#pane tbody tr[data-cc]").map(tr => tr.dataset.cc))]; if (!ids.length) return;
+    e.preventDefault(); const i = ids.indexOf(SEL), n = i < 0 ? 0 : e.key === "j" ? Math.min(ids.length - 1, i + 1) : Math.max(0, i - 1);
+    select(ids[n]); requestAnimationFrame(() => $(`#pane tr[data-cc="${CSS.escape(ids[n])}"]`)?.scrollIntoView({block: "nearest"})); }
+  else if (e.key === "s" && SEL) toggleStar(SEL);
+  else if (e.key === "c" && SEL) { const s = (BY[SEL] || [])[0]; if (s) copy(talk(s, D.corps[SEL]), "멘트를 복사했습니다"); }
+});
+$("#keysBtn").onclick = () => $("#keys").hidden = false;
+$("#keys").addEventListener("click", e => { if (e.target.id === "keys") $("#keys").hidden = true; });
+
+/* ───────── 테마·로그아웃 ───────── */
+try { const t = localStorage.getItem("wmr-theme"); if (t) document.documentElement.dataset.theme = t; } catch(e) {}
+$("#themeBtn").onclick = () => {
+  const cur = document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"), nx = cur === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = nx; try { localStorage.setItem("wmr-theme", nx); } catch(e) {}
+  if (view === "market") drawChart();
+};
+$("#lockBtn").onclick = async () => { await kv("del", "me"); location.hash = ""; location.reload(); };
+
+boot();
+})();
+</script>
+</body>
+</html>
